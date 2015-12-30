@@ -186,7 +186,7 @@ th {
 body {
   position: relative;
   font-family: "Microsoft YaHei", Verdana, sans-serif;
-  font-size: 20px;
+  font-size: 18px;
   line-height: 2;
   color: #555;
   background: #fff;
@@ -965,7 +965,7 @@ body {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #dd17c6;
+  background: #ac70bd;
 }
 .sidebar-nav {
   margin: 0 0 20px;
@@ -1202,7 +1202,7 @@ body {
 .post-body .figure .caption {
   margin: 10px auto 15px;
   text-align: center;
-  font-size: 20px;
+  font-size: 18px;
   color: #999;
   font-weight: bold;
   line-height: 1;
