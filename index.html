@@ -299,8 +299,14 @@
 <h2 id="u5B89_u88C5_u73AF_u5883"><a href="#u5B89_u88C5_u73AF_u5883" class="headerlink" title="安装环境"></a>安装环境</h2><h3 id="u5B89_u88C5node-js"><a href="#u5B89_u88C5node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>去node.js.js的官网下载自己平台对应的最新版本，只要安装成功，后来便不需要管它了。</p>
 <h3 id="u5B89_u88C5git"><a href="#u5B89_u88C5git" class="headerlink" title="安装git"></a>安装git</h3><p>git的客户端很多，关于git的使用我在这里不方便展开说，不清楚的同学我推荐大家去<em> <a href="http://www.liaoxuefeng.com/" target="_blank" rel="external">廖雪峰老师的网站</a></em>，上面的git教程对于新手来说是十分友好的，我git的入门也是在这上面看的，比较清晰易懂。</p>
 <h3 id="u5B89_u88C5Sublime"><a href="#u5B89_u88C5Sublime" class="headerlink" title="安装Sublime"></a>安装Sublime</h3><p>我自己的电脑是mac，所有有些代码的格式在xcode上面打开还是不太方便查看，sublime text 支持多种编程语言，还有很多种特色配色方案，对于这个软件的代码高亮我非常喜欢。<br>当然这个软件也是支持markdown语法的，把它当做一个文本编辑器也是一个很好的选择，我现在正在写的这篇日志也是一个用它编写的。</p>
-<h2 id="github_u8BBE_u7F6E"><a href="#github_u8BBE_u7F6E" class="headerlink" title="github设置"></a>github设置</h2><p><img src="/images/github截图.png" alt=""></p>
-<p>在github的页面新建一个分支</p>
+<h2 id="githubpage_u8BBE_u7F6E"><a href="#githubpage_u8BBE_u7F6E" class="headerlink" title="githubpage设置"></a>githubpage设置</h2><p><img src="/images/github截图.png" alt=""></p>
+<p>在github的页面新建一个仓库，也就是点击图片上绿色的按钮。</p>
+<p><img src="/images/github截图2.png" alt=""><br>特别要注意的是，你的项目名字必须是username.github.io这样的格式。特别项目名中的username要和<em>用户名</em>一直，开始我起了其他的名字导致一直不能正常使用。现在我们就完成了<br>github上面的配置了。</p>
+<p>这个githubpage也就是我们在github上面申请的免费的个人空间，大小有300m，作为个人博客是足够用了。</p>
+<p><img src="/images/github截图2.png" alt=""></p>
+<p>现在我们进入到我们新建的那个项目里面去，然后我们点击setting，然后设置我们的githubpage，基本上第一次申请，过几分钟后就成功了，然后我们访问username.github.io就可以<br>访问我们申请的githubpage 页面了。（<em>将username替换成你得用户名</em>）</p>
+<p>现在我们回到本地来，我们从命令行界面，通过下列命令将远程库clone到本地来。之前我们首先新建一个文件夹，如myblog，然后切换到这个文件内，执行下列命令。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/chouchang/chouchang.github.io</span><br></pre></td></tr></table></figure></p>
+<p>好了，此时会自动在<em>myblog</em>目录下创建子文件夹wingjay.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
 <h3 id="u5B89_u88C5hexo"><a href="#u5B89_u88C5hexo" class="headerlink" title="安装hexo"></a>安装hexo</h3><p>当node.js安装和git安装好以后变可以安装hexo了，输入以下命令。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo</span></span><br></pre></td></tr></table></figure></p>
 
             
