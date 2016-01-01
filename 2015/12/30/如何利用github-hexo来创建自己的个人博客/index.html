@@ -74,7 +74,7 @@ hexo
 <meta property="og:image" content="vaexiaochang.cn/images/github截图.png">
 <meta property="og:image" content="vaexiaochang.cn/images/github截图2.png">
 <meta property="og:image" content="vaexiaochang.cn/images/github截图3.png">
-<meta property="og:updated_time" content="2016-01-01T04:33:30.000Z">
+<meta property="og:updated_time" content="2016-01-01T04:34:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何利用github+hexo来创建自己的个人博客">
 <meta name="twitter:description" content="开始首先你得需要以下几样东西，缺一不可。
@@ -307,7 +307,7 @@ hexo
 <p><img src="/images/github截图3.png" alt=""></p>
 <p>现在我们进入到我们新建的那个项目里面去，我们点击setting，设置我们的githubpage，基本上第一次申请，过几分钟后就成功了，然后我们访问username.github.io就可以访问我们申请的githubpage 页面了。（<em>将username替换成你得用户名</em>）这个githubpage也就是我们在github上面申请的免费的个人空间，大小有300m，作为个人博客是足够用了。</p>
 <p>现在我们回到本地来，我们从命令行界面，通过下列命令将远程库clone到本地来。之前我们首先新建一个文件夹，如myblog，然后切换到这个文件内，执行下列命令。<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">https</span>://github.com/chouchang/chouchang.github.io</span><br></pre></td></tr></table></figure></p>
-<p>好了，此时会自动在<em>myblog</em>目录下创建子文件夹wingjay.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
+<p>好了，此时会自动在<em>myblog</em>目录下创建子文件夹chouchang.github.io,那里就是我们博客的代码，以后的操作都在git的管理之下了，此时默认的branch为master。</p>
 <h2 id="u5B89_u88C5hexo"><a href="#u5B89_u88C5hexo" class="headerlink" title="安装hexo"></a>安装hexo</h2><p>当node.js安装和git安装好以后变可以安装hexo了，输入以下命令。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="operator"><span class="keyword">install</span> -<span class="keyword">g</span> hexo-cli</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="u5EFA_u7AD9"><a href="#u5EFA_u7AD9" class="headerlink" title="建站"></a>建站</h3><p>安装完成后，输入以下命令，hexo会再指定文件夹中新建所需要的文件。<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init <span class="tag">&lt;<span class="title">folder</span>&gt;</span></span><br><span class="line">cd <span class="tag">&lt;<span class="title">folder</span>&gt;</span></span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
 <p>init命令中的<folder>就是文件夹chouchang.github.io。初始化后，chouchang.github.io里面就已经有完整的Hexo框架了。<br>创建完毕后，文件夹中会存在一些新的文件，每个文件夹的具体作用，请参考<a href="https://hexo.io/zh-cn/docs/setup.html" target="_blank" rel="external">hexo官网</a>。</folder></p>
