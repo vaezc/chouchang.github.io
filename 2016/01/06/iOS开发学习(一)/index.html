@@ -57,7 +57,7 @@
 <meta property="og:url" content="vaexiaochang.cn/2016/01/06/iOS开发学习(一)/index.html">
 <meta property="og:site_name" content="Vae">
 <meta property="og:description" content="前言 其实早就想在博客上分享和保存自己的学习笔记了，只是一直碍于没有很好的平台，所以平时都是写在本地，得益于最近创建了自己的博客，现在准备在寒假里投注更多的时间去学习 iOS，不会像在学校里一样，会有一些杂事分心。现在我开始在这里写下自己碰到的一些问题和记录一些重要的知识点，为自己后来回顾时也可以得到帮助。关于oc的一些知识和iOS的 前面的一些基础我就不在这里详细记录了，等以后碰到问题时再总结。">
-<meta property="og:updated_time" content="2016-01-06T15:41:44.000Z">
+<meta property="og:updated_time" content="2016-01-07T03:50:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发学习(一)">
 <meta name="twitter:description" content="前言 其实早就想在博客上分享和保存自己的学习笔记了，只是一直碍于没有很好的平台，所以平时都是写在本地，得益于最近创建了自己的博客，现在准备在寒假里投注更多的时间去学习 iOS，不会像在学校里一样，会有一些杂事分心。现在我开始在这里写下自己碰到的一些问题和记录一些重要的知识点，为自己后来回顾时也可以得到帮助。关于oc的一些知识和iOS的 前面的一些基础我就不在这里详细记录了，等以后碰到问题时再总结。">
@@ -272,7 +272,7 @@
 <h2 id="@property_u7684_u4F7F_u7528"><a href="#@property_u7684_u4F7F_u7528" class="headerlink" title="@property的使用"></a>@property的使用</h2><p><em>关于 property</em>：它是提供成员变量的访问方法的声明，控制成员变量的访问权限，控制多线程时成员变量的访问环境。property不仅可以在interface，在协议protocol，和类别category中都可以使用。<br>@property（attribute1，attribute2,…） 是property的官方表达式，其中的attribute都是属性。下面我对属性列表做一个小的总结。</p>
 <h3 id="u63A7_u5236_u6743_u9650"><a href="#u63A7_u5236_u6743_u9650" class="headerlink" title="控制权限"></a>控制权限</h3><p>1.可读性，readonly ， readwrite<br>    如果一个属性中的属性列表中存在readwrite，那么这种属性就是属性变量的默认属性，表示可读可写。也就是说如果没有显示说明属性列表中的readwrite，那么你申请的属性变量就是<br>    readwrite属性的。可以使用get方法和set方法。<br>    如果一个属性中的属性列表方法存在readonly，那么这个属性变量就是只读的，也就是说你只能使用这个变量的get方法了。</p>
 <h3 id="u624B_u52A8_u7BA1_u7406_u5185_u5B58_u7684_u5173_u952E_u5B57"><a href="#u624B_u52A8_u7BA1_u7406_u5185_u5B58_u7684_u5173_u952E_u5B57" class="headerlink" title="手动管理内存的关键字"></a>手动管理内存的关键字</h3><p>2.assign<br>    setter方法直接赋值，不生成内存管理代码。当属性是一个基本数据类型的时候，使用assign。<br>3.retain<br>    在setter 和 getter方法中加入一些内存管理的代码。当属性是一个普通OC对象的时候，使用retain。setter方法对参数进行release旧值，在retain新值。<br>4.copy<br>    复制对象，NSString 使用copy。setter方法进行copy操作，与retain处理流程一样，先release旧值，再copy出新对象。</p>
-<h3 id="u7EBF_u7A0B_u5B89_u5168"><a href="#u7EBF_u7A0B_u5B89_u5168" class="headerlink" title="线程安全"></a>线程安全</h3><p>5.nonatomic<br>    非原子，不会生成线程安全的代码，速度快，iOS通常都是这种<br>6.atomic<br>    原子(默认)，会生成线程安全的代码，速度慢    </p>
+<h3 id="u7EBF_u7A0B_u5B89_u5168"><a href="#u7EBF_u7A0B_u5B89_u5168" class="headerlink" title="线程安全"></a>线程安全</h3><p>5.nonatomic<br>    非原子，不会生成线程安全的代码，速度快，iOS通常都是这种<br><a id="more"></a><br>6.atomic<br>    原子(默认)，会生成线程安全的代码，速度慢    </p>
 <h3 id="ARC"><a href="#ARC" class="headerlink" title="ARC"></a>ARC</h3><p>7.strong<br>     oc对象一般使用strong<br>8.weak<br>    代理和控件一般使用weak<br>注意：当两个对象中的 成员变量相互引用<br>非ARC：当有循环引用的时候，其中一方必须是assign，另一方是retain<br>ARC：一方必须使用weak</p>
 <h2 id="u5F3A_u5F31_u5F15_u7528_u95EE_u9898"><a href="#u5F3A_u5F31_u5F15_u7528_u95EE_u9898" class="headerlink" title="强弱引用问题"></a>强弱引用问题</h2><h3 id="u5F3A_u53D8_u91CF"><a href="#u5F3A_u53D8_u91CF" class="headerlink" title="强变量"></a>强变量</h3><pre><code>通常，所有对象的指针变量都是强变量。也就是说，将对象的引用赋给变量使对象自动保持。然后，旧对象的引用会再赋值前被释放。最终，强变量默认会被初始化为零。无论它是实例变量、局部变量还是全局变量，这都成立。
 </code></pre><h3 id="u5F31_u53D8_u91CF"><a href="#u5F31_u53D8_u91CF" class="headerlink" title="弱变量"></a>弱变量</h3><pre><code>有时候需要为对象建立两者之间的关系，每个对象需要引用到其他的对象（可能是两个对象或者对象的循环链表）。 例如，iOS应用程序使用试图对象在屏幕上展现图形。视图会维护一个层次结构。一个视图上可能展现一张图片，在图片视图内可能展现出图片的标题。将图片视图设置为主视图，标题视图设置为子视图。当主视图显示的时候，子视图会自动显示出来。你可以把主视图想象为父视图，标题视图想象为子视图。图片主视图具有子视图。
