@@ -288,9 +288,7 @@
 
       
         
-          <span itemprop="articleBody">
-            
-              <h1 id="u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><a href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528" class="headerlink" title="一、 子网掩码的概念及作用"></a>一、 子网掩码的概念及作用</h1><p>子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。</p>
+          <h1 id="u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><a href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528" class="headerlink" title="一、 子网掩码的概念及作用"></a>一、 子网掩码的概念及作用</h1><p>子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。</p>
 <h1 id="u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801"><a href="#u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801" class="headerlink" title="二、 为什么需要使用子网掩码"></a>二、 为什么需要使用子网掩码</h1><p>虽然我们说子网掩码可以分离出 IP 地址中的网络部分与主机部分，可大家还是会有疑问，比如为什么要区分网络地址与主机地址？区分以后又怎样呢？那么好，让我们再详细的讲一下吧！  </p>
 <p>在使用 TCP/IP 协议的两台计算机之间进行通信时，我们通过将本机的子网掩码与接受方主机的 IP 地址进行 ‘ 与 ‘ 运算，即可得到目标主机所在的网络号，又由于每台主机在配置 TCP/IP 协议时都设置了一个本机 IP 地址与子网掩码，所以可以知道本机所在的网络号。</p>
 <p>通过比较这两个网络号，就可以知道接受方主机是否在本网络上。如果网络号相同，表明接受方在本网络上，那么可以通过相关的协议把数据包直接发送到目标主机；如果网络号不同，表明目标主机在远程网络上，那么数据包将会发送给本网络上的路由器，由路由器将数据包发送到其他网络，直至到达目的地。在这个过程中你可以看到，子网掩码是不可或缺的！</p>
@@ -313,89 +311,334 @@
 <p>子网掩码 11111111.11111111.11111111.00000000</p>
 <p>将两者做 ‘ 与 ‘ 运算得： 11000000.10101000.00000000.00000000</p>
 <p>将其化为十进制得： 192.168.0.0</p>
-<p>这便是上面 IP 的网络地址，主机地址以此类推。</p>
-<p>小技巧：由于观察到上面的子网掩码为 C 类地址的默认子网掩码（至于为什么，可看后面的子网掩码分类就明白了），便可直接看出网络地址为 IP 地址的前三部分，即前三个字节，主机地址为最后一部分。</p>
-<p><strong> 解惑：</strong></p>
-<p>什么？你还是不懂？问我为什么要做 ‘ 与 ‘ 运算而不是别的？其实你仔细观察一下上面的例子就应该能明白。</p>
-<p>‘1’ 在做 ‘ 与 ‘ 运算时，保存对应项结果， ‘0’ 在做 ‘ 与 ‘ 运算时，将对应项清零，利用 ‘ 与 ‘ 的这个特性，当管理员设置子网掩码时，即将子网掩码上与网络地址所对应的位都设为 ‘1’, 其他位都设为 ‘0’, 那么当作 ‘ 与 ‘ 时， IP 地址中的网络号将被保留到结果中，而主机号将被置 0 ，这样就解析出了网络号，解析主机号也一样，只需先把子网掩码取 ‘ 反 ‘, 再做 ‘ 与 ‘ 。</p>
-<h1 id="u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B"><a href="#u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B" class="headerlink" title="四、 子网掩码的分类"></a>四、 子网掩码的分类</h1><h2 id="1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A"><a href="#1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A" class="headerlink" title="1 ）缺省子网掩码："></a>1 ）缺省子网掩码：</h2><p>即未划分子网，对应的网络号的位都置 1 ，主机号都置 0 。</p>
-<p>A 类网络缺省子网掩码： 255.0.0.0</p>
-<p>B 类网络缺省子网掩码： 255.255.0.0</p>
-<p>C 类网络缺省子网掩码： 255.255.255.0</p>
-<h2 id="2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A"><a href="#2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A" class="headerlink" title="2 ）自定义子网掩码："></a>2 ）自定义子网掩码：</h2><p>将一个网络划分为几个子网，需要每一段使用不同的网络号或子网号，实际上我们可以认为是将主机号分为两个部分：子网号、子网主机号。 形式如下：</p>
-<p>未做子网划分的 IP 地址：网络号＋主机号</p>
-<p>做子网划分后的 IP 地址：网络号＋子网号＋子网主机号</p>
-<p>也就是说 IP 地址在划分子网后，以前的主机号位置的一部分给了子网号，余下的是子网主机号。</p>
-<h1 id="u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F"><a href="#u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F" class="headerlink" title="五、子网编址技术"></a>五、子网编址技术</h1><p>前面几点介绍了子网掩码的一些知识，下面我们来看看子网划分，不要认为子网划分与子网掩码没有关系哟，子网划分也是靠子网掩码来实现的。</p>
-<p>子网划分说白了是这样一个事情：因为在划分了子网后， IP 地址的网络号是不变的，因此在局域网外部看来，这里仍然只存在一个网络，即网络号所代表的那个网络；但在网络内部却是另外一个景象，因为我们每个子网的子网号是不同的，当用化分子网后的 IP 地址与子网掩码（注意，这里指的子网掩码已经不是缺省子网掩码了，而是自定义子网掩码，是管理员在经过计算后得出的）做 ‘ 与 ‘ 运算时，每个子网将得到不同的子网地址，从而实现了对网络的划分（得到了不同的地址，当然就能区别出各个子网了，有趣吧）。</p>
-<p>子网编址技术 ，即子网划分将会有助于以下问题的解决：</p>
-<p>1 ）巨大的网络地址管理耗费：如果你是一个 A 类网络的管理员，你一定会为管理数量庞大的主机而头痛的；</p>
-<p>2 ）路由器中的选路表的急剧膨胀：当路由器与其他路由器交换选路表时，互联网的负载是很高的，所需的计算量也很高；</p>
-<p>3 ） IP 地址空间有限并终将枯竭：这是一个至关重要的问题，高速发展的 internet, 使原来的编址方法不能适应，而一些 IP 地址却不能被充分的利用，造成了浪费。</p>
-<p>因此，在配置局域网或其他网络时，根据需要划分子网是很重要的，有时也是必要的。现在，子网编址技术已经被绝大多数局域网所使用。</p>
-<h1 id="u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801"><a href="#u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801" class="headerlink" title="六、 如何划分子网及确定子网掩码"></a>六、 如何划分子网及确定子网掩码</h1><p>在动手划分之前，一定要考虑网络目前的需求和将来的需求计划。</p>
-<p>划分子网主要从以下方面考虑 :</p>
-<p>1 、网络中物理段的数量（即要划分的子网数量）</p>
-<p>2 、每个物理段的主机的数量</p>
-<p>确定子网掩码的步骤：</p>
-<p>第一步：确定物理网段的数量，并将其转换为二进制数，并确定位数 n 。如：你需要 6 个子网， 6 的二进制值为 110 ，共 3 位 , 即 n=3 ；</p>
-<p>第二步：按照你 IP 地址的类型写出其缺省子网掩码。如 C 类，则缺省子网掩码为 11111111.11111111.11111111.00000000 ；</p>
-<p>第三步：将子网掩码中与主机号的前 n 位对应的位置置 1 ，其余位置置 0 。若 n=3 且为</p>
-<p>C 类地址：则得到子网掩码为 11111111.11111111.11111111.11100000 化为十进制得到 255.255.255.224</p>
-<p>B 类地址：则得到子网掩码为 11111111.11111111.11100000.00000000 化为十进制得到 255.255.224.0</p>
-<p>A 类地址：则得到子网掩码为 11111111.11100000.00000000.00000000 化为十进制得到 255.224.0.0</p>
-<p>另：由于网络被划分为 6 个子网，占用了主机号的前 3 位，若是 C 类地址，则主机号只能用 5 位来表示主机号，因此每个子网内的主机数量＝（ 2^5 ）－ 2 ＝ 30 ， 6 个子网总共所能标识的主机数将小于 254 ，这点请大家注意！（至于为什么减 2 ，可看后面说明）</p>
-<p><strong> 解惑：</strong></p>
-<p>1、 你可能有这样的疑问，比如在上面的例子里， 6 的二进制值为 110 ，那么为什么要将子网掩码中与主机号的前 n 位对应的位置都置 1 ，而不是用 6 的二进制 110 去替代前 n 位呢？</p>
-<p>呵呵，这个问题提的很好，答案是这样的：我们计算子网掩码的目的是什么？就是希望它在做 ‘ 与 ‘ 的时候能够解析出网络号，也就是说它与网络号所对应的位置都应该是 1 （当然包括与子网号所对应的位置），那么很显然，你写上 110 是不对的，如果你这么写，那么它的意义是主机号的前两位作为子网号，那么这样将最多划分 2 个子网（不明白没关系，下面有计算子网数量的方法），与我们当初所要划分的 6 个子网显然是不一致的。这样解释你能明白马？</p>
-<p>2、 细心的人可能会发现，划分 4 个子网， 5 个子网和 6 个子网的子网掩码是一样的，同为 255.255.255.224 ，是不是错了呢？三个子网掩码应该不同呀？呵呵，是这样的，因为 4 ， 5 ， 6 的二进制值都是 3 为，因此在子网掩码中这三位都置 1 ，划分是没有问题的，只是你的理解上有一点小小的问题，划分为 4 个子网，其实可以理解为划分为 6 个子网，但你只使用了其中的 4 个。比如你想划分 8 个子网，与划分 14 个子网所得到的子网掩码是一样的，都占用了 4 位作为子网号。</p>
-<h1 id="u4E03_u3001_u76F8_u5173_u95EE_u9898"><a href="#u4E03_u3001_u76F8_u5173_u95EE_u9898" class="headerlink" title="七、相关问题"></a>七、相关问题</h1><p>1 ）如何判断是否做了子网划分？</p>
-<p>如果它使用了缺省子网掩码，那么表示没有作子网划分；反之，则一定作了子网划分。</p>
-<p>2 ）如何计算子网地址？</p>
-<p>将 IP 地址与子网掩码的二进制形式做 ‘ 与 ‘ ，得到的结果即为子网地址。</p>
-<p>3 ）如何计算主机地址？</p>
-<p>先将子网掩码的二进制取 ‘ 反 ‘ ，再与 IP 地址做 ‘ 与 ‘ 。</p>
-<p>4 ）如何计算子网数量？</p>
-<p>这个问题大家会常常提到，还是从子网掩码入手，主要有两个步骤：</p>
-<ol>
-<li><p>观察子网掩码的二进制形式，确定作为子网号的位数 n ；</p>
-</li>
-<li><p>子网数量为 2^n － 2 。（为什么减 2 ，继续往下看）</p>
-</li>
-</ol>
-<p>举个例子来说，比如有这样一个子网掩码： 255.255.255.224 其二进制为：</p>
-<p>11111111.11111111.11111111.11100000</p>
-<p>可见 n=3,2 的 3 次方为 8 ，说明子网地址可能有</p>
-<p>如下 8 种情况：</p>
-<p>000      001      010       011      100     101      110      111</p>
-<p>但其中代表网络自身的 000 ；代表广播地址的 111 是被保留的，所以要减 2 。</p>
-<p>5 ）如何计算总主机数量，子网内主机数量？</p>
-<p>总主机数量＝子网数量×子网内主机数量</p>
-<p>再用一个例子给大家说明，比如子网掩码为 255.255.255.224</p>
-<p>上面的讨论知道它最多可以划分 6 个子网，那么每个子网内最多有多少个主机呢？其实上面我已经给大家算过了，由于网络被划分为 6 个子网，占用了主机号的前 3 位，且是 C 类地址，则主机号只能用 5 位来表示主机号，因此子网内的主机数量＝（ 2 的 5 次方）－ 2 ＝ 30.</p>
-<p>因此通过这个子网掩码我们可以算出这个网络最多可以标识 6*30=180 个主机（可见，在化分子网后，整个网络所能标识的主机数量将减少）。</p>
-<p>6 ）计算自定义子网 IP 地址范围</p>
-<p>通过一个自定义子网掩码，我们可以得到这个网络所有可能的 IP 地址范围。</p>
-<p>具体步骤：</p>
-<ol>
-<li><p>写出二进制子网地址；</p>
-</li>
-<li><p>将子网地址化为十进制；</p>
-</li>
-<li><p>计算子网所能容纳主机数；</p>
-</li>
-<li><p>得出 IP 范围（起始地址：子网地址＋ 1 ；终止地址：子网地址＋主机数）</p>
-</li>
-</ol>
-<p>假设一个子网掩码为： 255.255.255.224 ，可知其最多可以划分 6 个子网，子网内主机数为 30 ，那么所有可能的 IP 地址及计算流程如下：</p>
-<p>子网－－——子网地址（二进制）－－－－－－子网地址－－－－－实际 IP 范围</p>
-<p>1 － 11001010.01110000.00001010.00100000 － 202.112.10.32 － 202.112.10.33~202.112.10.62</p>
-<p>2 － 11001010.01110000.00001010.01000000 － 202.112.10.64 － 202.112.10.65~202.112.10.94</p>
-<p>3 － 11001010.01110000.00001010.01100000 － 202.112.10.96 － 202.112.10.97~202.112.10.126</p>
-<p>4 － 11001010.01110000.00001010.10000000 － 202.112.10.128 － 202.112.10.129~202.112.10.158</p>
-<p>5 － 11001010.01110000.00001010.10100000 － 202.112.10.160 － 202.112.10.161~202.112.10.190</p>
-<p>6 － 11001010.01110000.00001010.11000000 － 202.112.10.192 － 202.112.10.193~202.112.10.222</p>
-<p>来源：<a href="http://blog.csdn.net/jason314/article/details/5447743" target="_blank" rel="external">http://blog.csdn.net/jason314/article/details/5447743</a></p>
+<p>这便是上面 IP 的网络地址，主机地址以此类推。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/13/子网掩码详解/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/01/06/iOS开发学习(一)/" itemprop="url">
+                  iOS开发学习(一)
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-06T22:10:23+08:00" content="2016-01-06">
+              2016-01-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/06/iOS开发学习(一)/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/06/iOS开发学习(一)/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h1><p> 其实早就想在博客上分享和保存自己的学习笔记了，只是一直碍于没有很好的平台，所以平时都是写在本地，得益于最近创建了自己的博客，现在准备在寒假里投注更多的时间去学习iOS，不会<br> 像在学校里一样，会有一些杂事分心。现在我开始在这里写下自己碰到的一些问题和记录一些重要的知识点，为自己后来回顾时也可以得到帮助。关于oc的一些知识和iOS的前面的一些基础我就<br> 不在这里详细记录了，等以后碰到问题时再总结。</p>
+<h2 id="@property_u7684_u4F7F_u7528"><a href="#@property_u7684_u4F7F_u7528" class="headerlink" title="@property的使用"></a>@property的使用</h2><p><em>关于 property</em>：它是提供成员变量的访问方法的声明，控制成员变量的访问权限，控制多线程时成员变量的访问环境。property不仅可以在interface，在协议protocol，和类别category中都可以使用。<br>@property（attribute1，attribute2,…） 是property的官方表达式，其中的attribute都是属性。下面我对属性列表做一个小的总结。</p>
+<h3 id="u63A7_u5236_u6743_u9650"><a href="#u63A7_u5236_u6743_u9650" class="headerlink" title="控制权限"></a>控制权限</h3><p>1.可读性，readonly ， readwrite<br>    如果一个属性中的属性列表中存在readwrite，那么这种属性就是属性变量的默认属性，表示可读可写。也就是说如果没有显示说明属性列表中的readwrite，那么你申请的属性变量就是<br>    readwrite属性的。可以使用get方法和set方法。<br>    如果一个属性中的属性列表方法存在readonly，那么这个属性变量就是只读的，也就是说你只能使用这个变量的get方法了。</p>
+<h3 id="u624B_u52A8_u7BA1_u7406_u5185_u5B58_u7684_u5173_u952E_u5B57"><a href="#u624B_u52A8_u7BA1_u7406_u5185_u5B58_u7684_u5173_u952E_u5B57" class="headerlink" title="手动管理内存的关键字"></a>手动管理内存的关键字</h3><p>2.assign<br>    setter方法直接赋值，不生成内存管理代码。当属性是一个基本数据类型的时候，使用assign。<br>3.retain<br>    在setter 和 getter方法中加入一些内存管理的代码。当属性是一个普通OC对象的时候，使用retain。setter方法对参数进行release旧值，在retain新值。<br>4.copy<br>    复制对象，NSString 使用copy。setter方法进行copy操作，与retain处理流程一样，先release旧值，再copy出新对象。</p>
+<h3 id="u7EBF_u7A0B_u5B89_u5168"><a href="#u7EBF_u7A0B_u5B89_u5168" class="headerlink" title="线程安全"></a>线程安全</h3><p>5.nonatomic<br>    非原子，不会生成线程安全的代码，速度快，iOS通常都是这种<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/01/06/iOS开发学习(一)/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/30/如何利用github-hexo来创建自己的个人博客/" itemprop="url">
+                  如何利用github+hexo来创建自己的个人博客
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-30T20:59:17+08:00" content="2015-12-30">
+              2015-12-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/30/如何利用github-hexo来创建自己的个人博客/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/30/如何利用github-hexo来创建自己的个人博客/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <h1 id="u5F00_u59CB"><a href="#u5F00_u59CB" class="headerlink" title="开始"></a>开始</h1><p>首先你得需要以下几样东西，缺一不可。</p>
+<ul>
+<li><a href="https://nodejs.org/en/">Node.js</a></li>
+<li>Github 账号</li>
+<li>hexo</li>
+</ul>
+<h2 id="u5B89_u88C5_u73AF_u5883"><a href="#u5B89_u88C5_u73AF_u5883" class="headerlink" title="安装环境"></a>安装环境</h2><h3 id="u5B89_u88C5node-js"><a href="#u5B89_u88C5node-js" class="headerlink" title="安装node.js"></a>安装node.js</h3><p>去node.js.js的官网下载自己平台对应的最新版本，只要安装成功，后来便不需要管它了。</p>
+<h3 id="u5B89_u88C5git"><a href="#u5B89_u88C5git" class="headerlink" title="安装git"></a>安装git</h3><p>git的客户端很多，关于git的使用我在这里不方便展开说，不清楚的同学我推荐大家去<em> <a href="http://www.liaoxuefeng.com/">廖雪峰老师的网站</a></em>，上面的git教程对于新手来说是十分友好的，我git的入门也是在这上面看的，比较清晰易懂。</p>
+<h3 id="u5B89_u88C5Sublime"><a href="#u5B89_u88C5Sublime" class="headerlink" title="安装Sublime"></a>安装Sublime</h3><p>我自己的电脑是mac，所有有些代码的格式在xcode上面打开还是不太方便查看，sublime text 支持多种编程语言，还有很多种特色配色方案，对于这个软件的代码高亮我非常喜欢。<br>当然这个软件也是支持markdown语法的，把它当做一个文本编辑器也是一个很好的选择，我现在正在写的这篇日志也是用它编写的。<br>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2015/12/30/如何利用github-hexo来创建自己的个人博客/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2015/12/29/first/" itemprop="url">
+                  first
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2015-12-29T16:21:03+08:00" content="2015-12-29">
+              2015-12-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/日志/" itemprop="url" rel="index">
+                    <span itemprop="name">日志</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2015/12/29/first/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/first/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <span itemprop="articleBody">
+            
+              <p>这是<strong>新的开始</strong>，我用hexo创建了第一篇文章<br>通过下面的命令，就可以创建新文章<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vaedeMacBook-Pro:chouchang<span class="class">.github</span><span class="class">.io</span> vae$ hexo new <span class="string">"first"</span></span><br><span class="line">INFO  Created: ~/myblog/chouchang<span class="class">.github</span><span class="class">.io</span>/source/_posts/first.md</span><br></pre></td></tr></table></figure></p>
+<p>总算是弄好了这个问题了，这两天一直在研究怎么样去创建自己的个人博客。</p>
 
             
           </span>
