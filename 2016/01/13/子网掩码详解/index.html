@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="Vae">
 <meta property="og:description" content="一、 子网掩码的概念及作用子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。
 二、 为什么需要使用子网掩码虽然我们说子网掩码可以分离出 IP 地址中的网络部">
-<meta property="og:updated_time" content="2016-01-13T06:04:47.000Z">
+<meta property="og:updated_time" content="2016-01-13T06:06:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="子网掩码详解(转)">
 <meta name="twitter:description" content="一、 子网掩码的概念及作用子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。
@@ -343,14 +343,10 @@
 <ul>
 <li>细心的人可能会发现，划分 4 个子网， 5 个子网和 6 个子网的子网掩码是一样的，同为 255.255.255.224 ，是不是错了呢？三个子网掩码应该不同呀？呵呵，是这样的，因为 4 ， 5 ， 6 的二进制值都是 3 为，因此在子网掩码中这三位都置 1 ，划分是没有问题的，只是你的理解上有一点小小的问题，划分为 4 个子网，其实可以理解为划分为 6 个子网，但你只使用了其中的 4 个。比如你想划分 8 个子网，与划分 14 个子网所得到的子网掩码是一样的，都占用了 4 位作为子网号。</li>
 </ul>
-<h1 id="u4E03_u3001_u76F8_u5173_u95EE_u9898"><a href="#u4E03_u3001_u76F8_u5173_u95EE_u9898" class="headerlink" title="七、相关问题"></a>七、相关问题</h1><p>1.如何判断是否做了子网划分？</p>
-<p>如果它使用了缺省子网掩码，那么表示没有作子网划分；反之，则一定作了子网划分。</p>
-<p>2.如何计算子网地址？</p>
-<p>将 IP 地址与子网掩码的二进制形式做 ‘ 与 ‘ ，得到的结果即为子网地址。</p>
-<p>3.如何计算主机地址？</p>
-<p>先将子网掩码的二进制取 ‘ 反 ‘ ，再与 IP 地址做 ‘ 与 ‘ 。</p>
-<p>4.如何计算子网数量？</p>
-<p>这个问题大家会常常提到，还是从子网掩码入手，主要有两个步骤：</p>
+<h1 id="u4E03_u3001_u76F8_u5173_u95EE_u9898"><a href="#u4E03_u3001_u76F8_u5173_u95EE_u9898" class="headerlink" title="七、相关问题"></a>七、相关问题</h1><h2 id="1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F"><a href="#1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F" class="headerlink" title="1.如何判断是否做了子网划分？"></a>1.如何判断是否做了子网划分？</h2><p>如果它使用了缺省子网掩码，那么表示没有作子网划分；反之，则一定作了子网划分。</p>
+<h2 id="2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F"><a href="#2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F" class="headerlink" title="2.如何计算子网地址？"></a>2.如何计算子网地址？</h2><p>将 IP 地址与子网掩码的二进制形式做 ‘ 与 ‘ ，得到的结果即为子网地址。</p>
+<h2 id="3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F"><a href="#3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F" class="headerlink" title="3.如何计算主机地址？"></a>3.如何计算主机地址？</h2><p>先将子网掩码的二进制取 ‘ 反 ‘ ，再与 IP 地址做 ‘ 与 ‘ 。</p>
+<h2 id="4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F"><a href="#4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F" class="headerlink" title="4.如何计算子网数量？"></a>4.如何计算子网数量？</h2><p>这个问题大家会常常提到，还是从子网掩码入手，主要有两个步骤：</p>
 <ul>
 <li><p>观察子网掩码的二进制形式，确定作为子网号的位数 n ；</p>
 </li>
@@ -363,13 +359,11 @@
 <p>如下 8 种情况：</p>
 <p>000      001      010       011      100     101      110      111</p>
 <p>但其中代表网络自身的 000 ；代表广播地址的 111 是被保留的，所以要减 2 。</p>
-<p>5.如何计算总主机数量，子网内主机数量？</p>
-<p>总主机数量＝子网数量×子网内主机数量</p>
+<h2 id="5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F"><a href="#5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F" class="headerlink" title="5.如何计算总主机数量，子网内主机数量？"></a>5.如何计算总主机数量，子网内主机数量？</h2><p>总主机数量＝子网数量×子网内主机数量</p>
 <p>再用一个例子给大家说明，比如子网掩码为 255.255.255.224</p>
 <p>上面的讨论知道它最多可以划分 6 个子网，那么每个子网内最多有多少个主机呢？其实上面我已经给大家算过了，由于网络被划分为 6 个子网，占用了主机号的前 3 位，且是 C 类地址，则主机号只能用 5 位来表示主机号，因此子网内的主机数量＝（ 2 的 5 次方）－ 2 ＝ 30.</p>
 <p>因此通过这个子网掩码我们可以算出这个网络最多可以标识 6*30=180 个主机（可见，在化分子网后，整个网络所能标识的主机数量将减少）。</p>
-<p>6.计算自定义子网 IP 地址范围</p>
-<p>通过一个自定义子网掩码，我们可以得到这个网络所有可能的 IP 地址范围。</p>
+<h2 id="6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4"><a href="#6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4" class="headerlink" title="6.计算自定义子网 IP 地址范围"></a>6.计算自定义子网 IP 地址范围</h2><p>通过一个自定义子网掩码，我们可以得到这个网络所有可能的 IP 地址范围。</p>
 <p>具体步骤：</p>
 <ul>
 <li><p>写出二进制子网地址；</p>
@@ -551,7 +545,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><span class="nav-number">1.</span> <span class="nav-text">一、 子网掩码的概念及作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801"><span class="nav-number">2.</span> <span class="nav-text">二、 为什么需要使用子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E09_u3001__u5982_u4F55_u7528_u5B50_u7F51_u63A9_u7801_u5F97_u5230_u7F51_u7EDC_/__u4E3B_u673A_u5730_u5740"><span class="nav-number">3.</span> <span class="nav-text">三、 如何用子网掩码得到网络 / 主机地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B"><span class="nav-number">4.</span> <span class="nav-text">四、 子网掩码的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.1.</span> <span class="nav-text">1 ）缺省子网掩码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.2.</span> <span class="nav-text">2 ）自定义子网掩码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F"><span class="nav-number">5.</span> <span class="nav-text">五、子网编址技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801"><span class="nav-number">6.</span> <span class="nav-text">六、 如何划分子网及确定子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E03_u3001_u76F8_u5173_u95EE_u9898"><span class="nav-number">7.</span> <span class="nav-text">七、相关问题</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><span class="nav-number">1.</span> <span class="nav-text">一、 子网掩码的概念及作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801"><span class="nav-number">2.</span> <span class="nav-text">二、 为什么需要使用子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E09_u3001__u5982_u4F55_u7528_u5B50_u7F51_u63A9_u7801_u5F97_u5230_u7F51_u7EDC_/__u4E3B_u673A_u5730_u5740"><span class="nav-number">3.</span> <span class="nav-text">三、 如何用子网掩码得到网络 / 主机地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B"><span class="nav-number">4.</span> <span class="nav-text">四、 子网掩码的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.1.</span> <span class="nav-text">1 ）缺省子网掩码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.2.</span> <span class="nav-text">2 ）自定义子网掩码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F"><span class="nav-number">5.</span> <span class="nav-text">五、子网编址技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801"><span class="nav-number">6.</span> <span class="nav-text">六、 如何划分子网及确定子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E03_u3001_u76F8_u5173_u95EE_u9898"><span class="nav-number">7.</span> <span class="nav-text">七、相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F"><span class="nav-number">7.1.</span> <span class="nav-text">1.如何判断是否做了子网划分？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F"><span class="nav-number">7.2.</span> <span class="nav-text">2.如何计算子网地址？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F"><span class="nav-number">7.3.</span> <span class="nav-text">3.如何计算主机地址？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F"><span class="nav-number">7.4.</span> <span class="nav-text">4.如何计算子网数量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F"><span class="nav-number">7.5.</span> <span class="nav-text">5.如何计算总主机数量，子网内主机数量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4"><span class="nav-number">7.6.</span> <span class="nav-text">6.计算自定义子网 IP 地址范围</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
