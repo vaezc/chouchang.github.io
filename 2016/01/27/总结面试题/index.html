@@ -35,7 +35,7 @@
 <link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="iOS,笔记," />
 
 
 
@@ -51,15 +51,19 @@
 
 
 
-<meta name="description" content="我怎敢倒下，我身后空无一人。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Vae">
-<meta property="og:url" content="vaexiaochang.cn/index.html">
+<meta name="description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
+不同点：weak：表明属性定义了一种“非拥有关系”(nonowning relationsh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="总结面试题">
+<meta property="og:url" content="vaexiaochang.cn/2016/01/27/总结面试题/index.html">
 <meta property="og:site_name" content="Vae">
-<meta property="og:description" content="我怎敢倒下，我身后空无一人。">
+<meta property="og:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
+不同点：weak：表明属性定义了一种“非拥有关系”(nonowning relationsh">
+<meta property="og:updated_time" content="2016-02-16T03:03:02.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vae">
-<meta name="twitter:description" content="我怎敢倒下，我身后空无一人。">
+<meta name="twitter:title" content="总结面试题">
+<meta name="twitter:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
+不同点：weak：表明属性定义了一种“非拥有关系”(nonowning relationsh">
 
 
 
@@ -71,7 +75,7 @@
   };
 </script>
 
-  <title> Vae </title>
+  <title> 总结面试题 | Vae </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -92,9 +96,7 @@
 
 
 
-  <div class="container one-column 
-   page-home 
-">
+  <div class="container one-column page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -191,24 +193,9 @@
       <div class="main-inner">
         <div id="content" class="content">
           
-  <section id="posts" class="posts-expand">
 
+  <div id="posts" class="posts-expand">
     
-
-    
-    
-      
-      
-        
-        
-        
-      
-
-      
-    
-
-    
-      
 
   
   
@@ -228,10 +215,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/01/27/总结面试题/" itemprop="url">
-                  总结面试题
-                </a>
+                总结面试题
               
             
           </h1>
@@ -287,10 +271,7 @@
       
 
       
-        
-          <span itemprop="articleBody">
-            
-              <h1 id="u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A"><a href="#u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A" class="headerlink" title="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下："></a>这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：</h1><h2 id="1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><a href="#1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F" class="headerlink" title="1. 什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>1. 什么情况使用 weak 关键字，相比 assign 有什么不同？</h2><p><em>使用情况：</em><br> 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。</p>
+        <span itemprop="articleBody"><h1 id="u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A"><a href="#u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A" class="headerlink" title="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下："></a>这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：</h1><h2 id="1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><a href="#1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F" class="headerlink" title="1. 什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>1. 什么情况使用 weak 关键字，相比 assign 有什么不同？</h2><p><em>使用情况：</em><br> 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。</p>
 <p><em>不同点：</em><br>weak：表明属性定义了一种“非拥有关系”(nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质与assign类似，然而在属性所指的对象到摧毁时，属性也会清空。</p>
 <p>assign 的“设置方法”只会执行针对“纯量类型”（scalar type，例如CGFloat 或 NSInteger等）的简单赋值操作。</p>
 <h2 id="2-__u600E_u4E48_u7528_copy__u5173_u952E_u5B57_uFF1F"><a href="#2-__u600E_u4E48_u7528_copy__u5173_u952E_u5B57_uFF1F" class="headerlink" title="2. 怎么用 copy 关键字？"></a>2. 怎么用 copy 关键字？</h2><p><em>用途：</em></p>
@@ -388,31 +369,48 @@
 </code></pre><h2 id="28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F"><a href="#28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="28. runloop的mode作用是什么？"></a>28. runloop的mode作用是什么？</h2><pre><code>model 主要是用来指定事件在运行循环中的优先级的，分为：
 </code></pre><p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）：默认，空闲状态<br>UITrackingRunLoopMode：ScrollView滑动时<br>UIInitializationRunLoopMode：启动时<br>NSRunLoopCommonModes（kCFRunLoopCommonModes）：Mode集合<br>苹果公开提供的 Mode 有两个：</p>
 <p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）<br>NSRunLoopCommonModes（kCFRunLoopCommonModes）</p>
-
-            
-          </span>
-        
+</span>
       
     </div>
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/13/子网掩码详解/" rel="next" title="子网掩码详解(转)">
+                <i class="fa fa-chevron-left"></i> 子网掩码详解(转)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </article>
 
 
-    
 
-  </section>
-
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
         </div>
@@ -421,6 +419,14 @@
 
 
         
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/27/总结面试题/"
+           data-title="总结面试题" data-url="vaexiaochang.cn/2016/01/27/总结面试题/">
+      </div>
+    
+  </div>
+
 
       </div>
 
@@ -441,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" src="/images/ico.jpg" alt="zhouchang" itemprop="image"/>
           <p class="site-author-name" itemprop="name">zhouchang</p>
@@ -505,6 +520,23 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A"><span class="nav-number">1.</span> <span class="nav-text">这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><span class="nav-number">1.1.</span> <span class="nav-text">1. 什么情况使用 weak 关键字，相比 assign 有什么不同？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-__u600E_u4E48_u7528_copy__u5173_u952E_u5B57_uFF1F"><span class="nav-number">1.2.</span> <span class="nav-text">2. 怎么用 copy 关键字？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-__u8FD9_u4E2A_u5199_u6CD5_u4F1A_u51FA_u4EC0_u4E48_u95EE_u9898_uFF1A_@property__28copy_29_NSMutableArray_*array_3B__3F"><span class="nav-number">1.3.</span> <span class="nav-text">3.  这个写法会出什么问题： @property (copy) NSMutableArray *array; ?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-__u5982_u4F55_u8BA9_u81EA_u5DF1_u7684_u7C7B_u7528_copy__u4FEE_u9970_u7B26_uFF1F_u5982_u4F55_u91CD_u5199_u5E26_copy__u5173_u952E_u5B57_u7684_setter_uFF1F"><span class="nav-number">1.4.</span> <span class="nav-text">4. 如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-_@property__u7684_u672C_u8D28_u662F_u4EC0_u4E48_uFF1Fivar_u3001getter_u3001setter__u662F_u5982_u4F55_u751F_u6210_u5E76_u6DFB_u52A0_u5230_u8FD9_u4E2A_u7C7B_u4E2D_u7684_uFF1F"><span class="nav-number">1.5.</span> <span class="nav-text">5. @property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F"><span class="nav-number">1.6.</span> <span class="nav-text">28. runloop的mode作用是什么？</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
       
 
     </div>
@@ -597,6 +629,167 @@
   <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
 
   
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
 
   <script type="text/javascript" src="/js/bootstrap.js"></script>
 
