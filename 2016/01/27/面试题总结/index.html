@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="Vae">
 <meta property="og:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
 不同点：weak：表明属性定义了一种“非拥有关系”(nonowning relationsh">
-<meta property="og:updated_time" content="2016-03-01T09:44:56.000Z">
+<meta property="og:updated_time" content="2016-03-01T13:27:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结面试题">
 <meta name="twitter:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
@@ -281,6 +281,7 @@
 <li><p>block也经常使用copy关键字。<br>block 使用 copy 是从 MRC 遗留下来的“传统”,在 MRC 中,方法内部的 block 是在栈区的,使用 copy 可以把它放到堆区.在 ARC 中写不写都行：对于 block 使用 copy 还是 strong<br>效果是一样的，但写上 copy 也无伤大雅，还能时刻提醒我们：编译器自动对 block 进行了 copy 操作。如果不写 copy ，该类的调用者有可能会忘记或者根本不知道“编译器会自动对<br>block 进行了 copy 操作”，他们有可能会在调用之前自行拷贝属性值。这种操作多余而低效。</p>
 </li>
 </ol>
+<a id="more"></a>
 <h2 id="3-__u8FD9_u4E2A_u5199_u6CD5_u4F1A_u51FA_u4EC0_u4E48_u95EE_u9898_uFF1A_@property__28copy_29_NSMutableArray_*array_3B__3F"><a href="#3-__u8FD9_u4E2A_u5199_u6CD5_u4F1A_u51FA_u4EC0_u4E48_u95EE_u9898_uFF1A_@property__28copy_29_NSMutableArray_*array_3B__3F" class="headerlink" title="3.  这个写法会出什么问题： @property (copy) NSMutableArray *array; ?"></a>3.  这个写法会出什么问题： @property (copy) NSMutableArray *array; ?</h2><p><em>两个问题：</em></p>
 <ol>
 <li>当添加，删除，修改数组内的元素的时候，程序会因为找不到对应的方法而崩溃，因为copy就是复制一个不可变的NSArray 的对象。</li>
@@ -500,11 +501,10 @@
 <p>  2.运行时创建的类是可以添加实例变量，调用class_addIvar函数。但是得在调用objc_allocateClasspair 之后，objc_registerClassPair之前，原因同上。</p>
 </li>
 </ul>
-<h2 id="27-_runloop_u548C_u7EBF_u7A0B_u6709_u4EC0_u4E48_u5173_u7CFB_uFF1F"><a href="#27-_runloop_u548C_u7EBF_u7A0B_u6709_u4EC0_u4E48_u5173_u7CFB_uFF1F" class="headerlink" title="27. runloop和线程有什么关系？"></a>27. runloop和线程有什么关系？</h2><p>   总的来说，runloop，正如其名，loop表示某种玄幻，和run放在一起就表示一直在运行着的循环。实际上，runloop 和线程是紧密相连的， 可以这样说runloop是为了线程而生的，<br>    没有线程，它就没有存在的必要。 runloop是线程的基础架构部分，cocoa 和corefundation 都提供了runloop 对象方便配置和管理线程的runloop （以下都以cocoa为例。）<br>    每个线程，包括主线程（main thread）都有与之相应的runl 对象</p>
-<p>   runloop 和线程的关系：</p>
+<h2 id="27-_runloop_u548C_u7EBF_u7A0B_u6709_u4EC0_u4E48_u5173_u7CFB_uFF1F"><a href="#27-_runloop_u548C_u7EBF_u7A0B_u6709_u4EC0_u4E48_u5173_u7CFB_uFF1F" class="headerlink" title="27. runloop和线程有什么关系？"></a>27. runloop和线程有什么关系？</h2><p>   总的来说，runloop，正如其名，loop表示某种玄幻，和run放在一起就表示一直在运行着的循环。实际上，runloop 和线程是紧密相连的， 可以这样说runloop是为了线程而生的，<br>    没有线程，它就没有存在的必要。 runloop是线程的基础架构部分，cocoa 和corefundation 都提供了runloop 对象方便配置和管理线程的runloop （以下都以cocoa为例。）<br>每个线程，包括主线程（main thread）都有与之相应的runl 对象</p>
+<p> runloop 和线程的关系：</p>
 <ol>
-<li>主线程的runloop 默认是启动的。<pre><code>iOS的应用程序里面，程序启动会有一个如下的main()函数
-</code></pre></li>
+<li>主线程的runloop 默认是启动的。<br>iOS的应用程序里面，程序启动会有一个如下的main()函数</li>
 </ol>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">    <span class="keyword">int</span> main(<span class="keyword">int</span> argc, <span class="keyword">char</span> * argv[]) &#123;</span><br><span class="line"><span class="keyword">@autoreleasepool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UIApplicationMain</span>(argc, argv, <span class="literal">nil</span>, <span class="built_in">NSStringFromClass</span>([AppDelegate class]));</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>重点是UIAoolicationMain()函数，这个方法会为main thread设置一个NSRunLoop对象，这就解释了:为什么我们的应用可以在无人操作的时候休息，需要它工作时便工作。</p>
@@ -515,7 +515,7 @@
 </li>
 </ol>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSRunLoop</span> *runloop = [<span class="built_in">NSRunLoop</span> currentRunLoop];</span><br></pre></td></tr></table></figure>
-<h2 id="28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F"><a href="#28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="28. runloop的mode作用是什么？"></a>28. runloop的mode作用是什么？</h2><p>   model 主要是用来指定事件在运行循环中的优先级的，分为：</p>
+<h2 id="28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F"><a href="#28-_runloop_u7684mode_u4F5C_u7528_u662F_u4EC0_u4E48_uFF1F" class="headerlink" title="28. runloop的mode作用是什么？"></a>28. runloop的mode作用是什么？</h2><p>model 主要是用来指定事件在运行循环中的优先级的，分为：</p>
 <p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）：默认，空闲状态<br>UITrackingRunLoopMode：ScrollView滑动时<br>UIInitializationRunLoopMode：启动时<br>NSRunLoopCommonModes（kCFRunLoopCommonModes）：Mode集合<br>苹果公开提供的 Mode 有两个：</p>
 <p>NSDefaultRunLoopMode（kCFRunLoopDefaultMode）<br>NSRunLoopCommonModes（kCFRunLoopCommonModes）</p>
 </span>
@@ -544,6 +544,10 @@
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/01/iOS四种本地存储/" rel="prev" title="iOS开发中四种本地存储">
+                iOS开发中四种本地存储 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
