@@ -60,7 +60,8 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那">
+#沙盒
+在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发中四种本地存储">
 <meta property="og:url" content="vaexiaochang.cn/2016/03/01/iOS四种本地存储/index.html">
@@ -74,9 +75,10 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那">
+#沙盒
+在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
 <meta property="og:image" content="vaexiaochang.cn/images/目录结构.png">
-<meta property="og:updated_time" content="2016-03-01T13:35:27.000Z">
+<meta property="og:updated_time" content="2016-03-02T04:28:15.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发中四种本地存储">
 <meta name="twitter:description" content="#前言
@@ -88,7 +90,8 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那">
+#沙盒
+在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
 
 
 
@@ -305,17 +308,24 @@ CoreDate
 <li><strong>SQLite3</strong></li>
 <li><strong>CoreDate</strong></li>
 </ul>
-<p>#沙盒<br>在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个目录就成为沙盒目录。</p>
-<p>##1.结构<br>我们先来看下沙盒下有那些目录</p>
+<p>#沙盒</p>
+<p>在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个目录就成为沙盒目录。</p>
+<p>##1.结构</p>
+<p>我们先来看下沙盒下有那些目录</p>
 <p><img src="/images/目录结构.png" alt=""></p>
-<p>###Documents<br>保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</p>
+<p>###Documents</p>
+<p>保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>,<span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.firstObject</span>;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</span><br></pre></td></tr></table></figure>
-<p>###Library/Caches<br>iTunes不会同步此文件夹，适合存储一些体积较大，不需要备份的数据。</p>
+<p>###Library/Caches</p>
+<p>iTunes不会同步此文件夹，适合存储一些体积较大，不需要备份的数据。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *caches=[<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,caches);</span><br></pre></td></tr></table></figure>
-<p>###Library/Preferences<br>保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录。</p>
-<p>###tmp<br>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。</p>
+<p>###Library/Preferences</p>
+<p>保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录。</p>
+<p>###tmp</p>
+<p>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *tmpPath = <span class="built_in">NSTemporaryDirectory</span>();</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,tmpPath);</span><br></pre></td></tr></table></figure>
-<p>##2.Plist文件<br>Plist就是属性列表（Property List）的简称，是Apple公司自己发明的来存储数据的。plist文件就是将某些特定的类，通过xml文件的方式保存在目录中。</p>
+<p>##2.Plist文件</p>
+<p>Plist就是属性列表（Property List）的简称，是Apple公司自己发明的来存储数据的。plist文件就是将某些特定的类，通过xml文件的方式保存在目录中。</p>
 <p>可以被序列化的类型只有以下几种：</p>
 <ul>
 <li><p>NSArray</p>
