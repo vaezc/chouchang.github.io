@@ -74,7 +74,7 @@ UITbleView分为两种样式：
 <meta property="og:image" content="vaexiaochang.cn/images/tableview1.png">
 <meta property="og:image" content="vaexiaochang.cn/images/tableview2.png">
 <meta property="og:image" content="vaexiaochang.cn/images/附属物.png">
-<meta property="og:updated_time" content="2016-03-10T13:23:28.000Z">
+<meta property="og:updated_time" content="2016-03-10T13:27:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UITableView详解">
 <meta name="twitter:description" content="前言：在现在的iOS开发中，有很多地方都用到了UITableView,可以这样说，基本上市场上流行的应用都用到了，所以它的重要性就是不言而喻的，今天我就做一下总结。
@@ -314,7 +314,7 @@ UITbleView分为两种样式：
 <li>与边框的分隔距离设置    separatorInset</li>
 </ol>
 <p>#UITableView用来干嘛<br>UITableView用来展示大量的数据信息给用户，比如自己有很多种信息想呈现给用户，就要通过tableview来呈现，在iOS系统自带的原生app里面非常常见，比如说通讯录这个应用，就通过每一行显示一个联系人来展现联系人的信息，当你点击时就会进入到另一个界面，下一个界面也是通过tableview来实现的，所以说掌握好UITableview对开发学习十分有帮助。</p>
-<p>下面我就来讲一讲，它的具体用法。</p>
+<p>下面我就来讲一讲，它的具体用法。<br><a id="more"></a></p>
 <p>UITableView主要是通过两个协议来实现展示数据和进行交互操作的：</p>
 <p>##<strong>UITableViewDataSource</strong></p>
 <p>dataSource是UITableViewDataSource类型，其主要作用是<strong>提供显示用的数据</strong>（UITableViewCell）,UITableView会向数据源查询<strong>一共有多少行数据以及每一行显示什么数据等</strong>。和根据用户的操作进行相应的<strong>数据更新操作</strong>，如果数据没有更新具体操作的话，可能会导致数据显示混乱，严重的话会导致程序崩溃。<strong>凡是遵守</strong>UITableViewDataSource协议的OC对象，都可以是<strong>UITableView的数据源</strong><br>。</p>
