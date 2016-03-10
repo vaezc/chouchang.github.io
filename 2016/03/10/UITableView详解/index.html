@@ -1,0 +1,767 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="前言：在现在的iOS开发中，有很多地方都用到了UITableView,可以这样说，基本上市场上流行的应用都用到了，所以它的重要性就是不言而喻的，今天我就做一下总结。
+#什么是UITableView?1.UITableView继承自UIScrollView,支持垂直滚动，而且性能极好。
+UITbleView分为两种样式：
+
+
+
+不分组的  UITableViewStylePlain
+分组">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UITableView详解">
+<meta property="og:url" content="vaexiaochang.cn/2016/03/10/UITableView详解/index.html">
+<meta property="og:site_name" content="Vae">
+<meta property="og:description" content="前言：在现在的iOS开发中，有很多地方都用到了UITableView,可以这样说，基本上市场上流行的应用都用到了，所以它的重要性就是不言而喻的，今天我就做一下总结。
+#什么是UITableView?1.UITableView继承自UIScrollView,支持垂直滚动，而且性能极好。
+UITbleView分为两种样式：
+
+
+
+不分组的  UITableViewStylePlain
+分组">
+<meta property="og:image" content="vaexiaochang.cn/images/tableview1.png">
+<meta property="og:image" content="vaexiaochang.cn/images/tableview2.png">
+<meta property="og:image" content="vaexiaochang.cn/images/附属物.png">
+<meta property="og:updated_time" content="2016-03-10T13:23:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UITableView详解">
+<meta name="twitter:description" content="前言：在现在的iOS开发中，有很多地方都用到了UITableView,可以这样说，基本上市场上流行的应用都用到了，所以它的重要性就是不言而喻的，今天我就做一下总结。
+#什么是UITableView?1.UITableView继承自UIScrollView,支持垂直滚动，而且性能极好。
+UITbleView分为两种样式：
+
+
+
+不分组的  UITableViewStylePlain
+分组">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> UITableView详解 | Vae </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vae</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">现在开始认真的去做一些事</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                UITableView详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-10T20:00:00+08:00" content="2016-03-10">
+              2016-03-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/10/UITableView详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/10/UITableView详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>前言：在现在的iOS开发中，有很多地方都用到了UITableView,可以这样说，基本上市场上流行的应用都用到了，所以它的重要性就是不言而喻的，今天我就做一下总结。</p>
+<p>#什么是UITableView?<br>1.<strong>UITableView继承自UIScrollView,支持垂直滚动，而且性能极好。</strong></p>
+<p>UITbleView分为两种样式：</p>
+<p><img src="/images/tableview1.png" alt=""></p>
+<p><img src="/images/tableview2.png" alt=""></p>
+<ol>
+<li>不分组的  UITableViewStylePlain</li>
+<li>分组        UITableViewStyleGroued</li>
+</ol>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span><span class="built_in">NS_ENUM</span>(<span class="built_in">NSInteger</span>, <span class="built_in">UITableViewStyle</span>) &#123;</span><br><span class="line">       <span class="built_in">UITableViewStylePlain</span>,                 <span class="comment">// regular table view</span></span><br><span class="line">       <span class="built_in">UITableViewStyleGrouped</span>                <span class="comment">// preferences style table view</span></span><br><span class="line">       &#125;;</span><br></pre></td></tr></table></figure>
+<p>2.可以分组显示内容，其中分组称为section，行称为row。</p>
+<p>3.frame决定了tableview显示的位置和边框，每一行的位置都会放一个UITableViewCell来负责显示行的内容。</p>
+<p>4.常用的属性：</p>
+<ol>
+<li>分割线样式        separatorStyle</li>
+<li>分割线颜色        sepatatorColor</li>
+<li>行高            rowHeight</li>
+<li>控制代理        delegate</li>
+<li>数据代理        dataSource</li>
+<li>与边框的分隔距离设置    separatorInset</li>
+</ol>
+<p>#UITableView用来干嘛<br>UITableView用来展示大量的数据信息给用户，比如自己有很多种信息想呈现给用户，就要通过tableview来呈现，在iOS系统自带的原生app里面非常常见，比如说通讯录这个应用，就通过每一行显示一个联系人来展现联系人的信息，当你点击时就会进入到另一个界面，下一个界面也是通过tableview来实现的，所以说掌握好UITableview对开发学习十分有帮助。</p>
+<p>下面我就来讲一讲，它的具体用法。</p>
+<p>UITableView主要是通过两个协议来实现展示数据和进行交互操作的：</p>
+<p>##<strong>UITableViewDataSource</strong></p>
+<p>dataSource是UITableViewDataSource类型，其主要作用是<strong>提供显示用的数据</strong>（UITableViewCell）,UITableView会向数据源查询<strong>一共有多少行数据以及每一行显示什么数据等</strong>。和根据用户的操作进行相应的<strong>数据更新操作</strong>，如果数据没有更新具体操作的话，可能会导致数据显示混乱，严重的话会导致程序崩溃。<strong>凡是遵守</strong>UITableViewDataSource协议的OC对象，都可以是<strong>UITableView的数据源</strong><br>。</p>
+<p>UITableViewDataSource协议<br>一般共有三个方法:</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">/<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  返回tableview有多少组数据，一般不写的话，默认是一组</span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@param tableView   当前的tableview对象</span></span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@return 返回多少组数据</span></span><br><span class="line"> <span class="keyword">*</span>/</span><br><span class="line">- (NSInteger)numberOfSectionsInTableView:(UITableView <span class="keyword">*</span>)tableView</span><br><span class="line">&#123;</span><br><span class="line">    return 1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  每一组有多少行数据</span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@param tableView 当前的tableview对象</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@param section   当前的组</span></span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@return 返回当前组一共有多少行的数据</span></span><br><span class="line"> <span class="keyword">*</span>/</span><br><span class="line">- (NSInteger)tableView:(UITableView <span class="keyword">*</span>)tableView numberOfRowsInSection:(NSInteger)section</span><br><span class="line">&#123;</span><br><span class="line">    return self.heroes.count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/<span class="keyword">*</span><span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  每一行显示的内容</span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@param tableView 当前tableview的对象</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@param indexPath 行和列的集合</span></span><br><span class="line"> <span class="keyword">*</span></span><br><span class="line"> <span class="keyword">*</span>  <span class="comment">@return 返回当前tableview的行</span></span><br><span class="line"> <span class="keyword">*</span>/</span><br><span class="line"></span><br><span class="line">- (UITableViewCell <span class="keyword">*</span>)tableView:(UITableView <span class="keyword">*</span>)tableView cellForRowAtIndexPath:(NSIndexPath <span class="keyword">*</span>)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    //1 创建cell</span><br><span class="line">//    UITableViewCell <span class="keyword">*</span>cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:nil];</span><br><span class="line">    </span><br><span class="line">    //从缓存池中取可用的cell</span><br><span class="line">    static NSString <span class="keyword">*</span>reuseId = <span class="comment">@"hero";</span></span><br><span class="line">    UITableViewCell <span class="keyword">*</span>cell = [tableView dequeueReusableCellWithIdentifier:reuseId];</span><br><span class="line">    if (cell == nil) &#123;</span><br><span class="line">        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseId];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">  </span><br><span class="line">    //2 给cell内部的子控件赋值</span><br><span class="line">    //获取数据</span><br><span class="line">    CZHero <span class="keyword">*</span>hero = self.heroes[indexPath.row];</span><br><span class="line">    cell.textLabel.text = hero.name;</span><br><span class="line">    cell.detailTextLabel.text = hero.intro;</span><br><span class="line">    cell.imageView.image = [UIImage imageNamed:hero.icon];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //设置cell背景透明</span><br><span class="line">    cell.backgroundColor = [UIColor clearColor];</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //设置cell的附属物</span><br><span class="line">    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;</span><br><span class="line">    </span><br><span class="line">    //自定义cell的附属物</span><br><span class="line">    cell.accessoryView = [UIButton buttonWithType:UIButtonTypeContactAdd];</span><br><span class="line">    </span><br><span class="line">    //设置详细内容label的属性</span><br><span class="line">    cell.detailTextLabel.numberOfLines = 0;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    //3 返回cell</span><br><span class="line">    return cell;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>先将对象遵循UITableViewDataSource协议，然后再实现以上的方法，最后才能在cell中显示出来。</p>
+<p>上面代码里面的附属物的主要几个属性：</p>
+<p><img src="/images/附属物.png" alt=""></p>
+<p><strong>UITableViewCell重用问题</strong></p>
+<p>iOS设备的内存有限，如果用UITableView显示成千上万条数据，就需要成千上万个UITableViewCell对象的话，那将会耗尽iOS设备的内存。要解决该问题，需要重用UITableViewCell对象.<br>在代码中如果按照第一种方式创建cell对象的话，就没有用到缓存池技术。第二种创建方式就用到了缓存池技术，将每次划出界面外的cell放入到缓存池中，然后下面新划入到界面的cell，先判断缓存池中是否有未使用的cell，再从缓存池中拿到前面已经放入到缓存池中的cell对象，dataSource会用心得数据配置这个UITableViewCell,重新显示到窗口上，从而避免创建对象。节约了内存空间。</p>
+<p><strong>重用时应该注意的问题</strong></p>
+<p>有时候需要自定义UITableViewCell(用一个子类去继承UITableViewCell),而且每一行用的不一定是同一种的UITableViewCell,所以一个UITableView可能拥有不同类型的UITableViewCell，缓存池中也会有很多不同类型的UITableViewCell，那么在重用的时候就会导致显示了错误类型的cell。</p>
+<p><strong>解决方法：</strong></p>
+<p>UITableViewCell有一个NSString *reuseIdentifier属性，可以在初始化的UITabelViewCell的时候传入一个特定的字符串来设置reuseIdentifier(一般用UITableViewCell的类型)。当uitableview要求datasource返回UITableViewCell时，先通过一个字符串标示到缓存池中查找对应类型的UITableViewCell对象，如果有就重用，如果没有，就传入这个字符串标示来初始化一个UITableViewCell对象。<br>具体的重用代码如下:</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">- (UITableViewCell <span class="keyword">*</span>)tableView:(UITableView <span class="keyword">*</span>)tableView cellForRowAtIndexPath:(NSIndexPath <span class="keyword">*</span>)indexPath&#123;    // 1.定义一个cell的标识      static NSString <span class="keyword">*</span>ID = <span class="comment">@”cell";</span>        // 2.从缓存池中取出cell      UITableViewCell <span class="keyword">*</span>cell = [tableView dequeueReusableCellWithIdentifier:ID];        // 3.如果缓存池中没有cell      if (cell == nil) &#123;        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];    &#125;        // 4.设置cell的属性...          return cell;&#125;</span><br></pre></td></tr></table></figure>
+<p>##UITableViewDelegate</p>
+<p>其主要几个方法如下：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span><br><span class="line"> *  返回当前行的高度</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="built_in">CGFloat</span>)tableView:(<span class="built_in">UITableView</span> *)tableView heightForRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (indexPath<span class="variable">.row</span> % <span class="number">2</span> == <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">60</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">100</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当选中cell的时候执行</span></span><br><span class="line">- (<span class="keyword">void</span>)tableView:(<span class="built_in">UITableView</span> *)tableView didSelectRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//选中行对应的数据</span></span><br><span class="line">    CZHero *hero = <span class="keyword">self</span><span class="variable">.heroes</span>[indexPath<span class="variable">.row</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIAlertView</span> *alertView = [[<span class="built_in">UIAlertView</span> alloc] initWithTitle:<span class="string">@"提示"</span> message:<span class="literal">nil</span> delegate:<span class="keyword">self</span> cancelButtonTitle:<span class="string">@"取消"</span> otherButtonTitles:<span class="string">@"确定"</span>, <span class="literal">nil</span>];</span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    alertView<span class="variable">.alertViewStyle</span> = <span class="built_in">UIAlertViewStylePlainTextInput</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//给alertView中得文本框赋值</span></span><br><span class="line">    [alertView textFieldAtIndex:<span class="number">0</span>]<span class="variable">.text</span> = hero<span class="variable">.name</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//记录当前行号</span></span><br><span class="line">    alertView<span class="variable">.tag</span> = indexPath<span class="variable">.row</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    [alertView show];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//section头部的title</span></span><br><span class="line">-(<span class="built_in">NSString</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView titleForHeaderInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"搞个大新闻"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//section尾部的title</span></span><br><span class="line">-(<span class="built_in">NSString</span> *)tableView:(<span class="built_in">UITableView</span> *)tableView titleForFooterInSection:(<span class="built_in">NSInteger</span>)section</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">@"见风就是雨"</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//section头部的高度</span></span><br><span class="line"><span class="comment">//-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//section尾部的高度</span></span><br><span class="line"><span class="comment">//-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section</span></span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/01/iOS四种本地存储/" rel="next" title="iOS开发中四种本地存储">
+                <i class="fa fa-chevron-left"></i> iOS开发中四种本地存储
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/10/UITableView详解/"
+           data-title="UITableView详解" data-url="vaexiaochang.cn/2016/03/10/UITableView详解/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/ico.jpg" alt="zhouchang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhouchang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">我怎敢倒下，我身后空无一人。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chouchang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3562983664" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <p class="post-toc-empty">此文章未包含目录</p>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouchang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vaexiaochang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

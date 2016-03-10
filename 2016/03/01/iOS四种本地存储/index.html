@@ -51,8 +51,7 @@
 
 
 
-<meta name="description" content="#前言
-在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
+<meta name="description" content="前言在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
 
 plist(文件属性)
 preference(偏好设置)
@@ -60,14 +59,12 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒
-在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
+沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS开发中四种本地存储">
 <meta property="og:url" content="vaexiaochang.cn/2016/03/01/iOS四种本地存储/index.html">
 <meta property="og:site_name" content="Vae">
-<meta property="og:description" content="#前言
-在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
+<meta property="og:description" content="前言在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
 
 plist(文件属性)
 preference(偏好设置)
@@ -75,14 +72,12 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒
-在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
+沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个">
 <meta property="og:image" content="vaexiaochang.cn/images/目录结构.png">
-<meta property="og:updated_time" content="2016-03-02T04:28:15.000Z">
+<meta property="og:updated_time" content="2016-03-02T05:19:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS开发中四种本地存储">
-<meta name="twitter:description" content="#前言
-在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
+<meta name="twitter:description" content="前言在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。
 
 plist(文件属性)
 preference(偏好设置)
@@ -90,8 +85,7 @@ NSkeyedArchiver(归档)
 SQLite3
 CoreDate
 
-#沙盒
-在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，">
+沙盒在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个">
 
 
 
@@ -299,8 +293,7 @@ CoreDate
       
 
       
-        <span itemprop="articleBody"><p>#前言</p>
-<p>在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。</p>
+        <span itemprop="articleBody"><h1 id="u524D_u8A00"><a href="#u524D_u8A00" class="headerlink" title="前言"></a>前言</h1><p>在学习的过程中学习到iOS中有四种本地存储，也就是数据持久化，把数据存储在沙盘中，使得应用程序在退出下次访问的时候可以继续读取数据，现在把他们做一个总结。</p>
 <ul>
 <li><strong>plist</strong>(文件属性)</li>
 <li><strong>preference</strong>(偏好设置)</li>
@@ -308,24 +301,17 @@ CoreDate
 <li><strong>SQLite3</strong></li>
 <li><strong>CoreDate</strong></li>
 </ul>
-<p>#沙盒</p>
-<p>在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个目录就成为沙盒目录。</p>
-<p>##1.结构</p>
-<p>我们先来看下沙盒下有那些目录</p>
+<h1 id="u6C99_u76D2"><a href="#u6C99_u76D2" class="headerlink" title="沙盒"></a>沙盒</h1><p>在说上述存储方式之前，我们先要清楚社和目录的机制，在iOS中，每个程序都只能访问自己的目录，那么那个目录就成为沙盒目录。</p>
+<h2 id="1-_u7ED3_u6784"><a href="#1-_u7ED3_u6784" class="headerlink" title="1.结构"></a>1.结构</h2><p>我们先来看下沙盒下有那些目录</p>
 <p><img src="/images/目录结构.png" alt=""></p>
-<p>###Documents</p>
-<p>保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</p>
+<h3 id="Documents"><a href="#Documents" class="headerlink" title="Documents"></a>Documents</h3><p>保存应用运行时生成的需要持久化的数据，iTunes同步设备时会备份该目录。例如，游戏应用可将游戏存档保存在该目录</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *path = <span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSDocumentDirectory</span>,<span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>)<span class="variable">.firstObject</span>;</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, path);</span><br></pre></td></tr></table></figure>
-<p>###Library/Caches</p>
-<p>iTunes不会同步此文件夹，适合存储一些体积较大，不需要备份的数据。</p>
+<h3 id="Library/Caches"><a href="#Library/Caches" class="headerlink" title="Library/Caches"></a>Library/Caches</h3><p>iTunes不会同步此文件夹，适合存储一些体积较大，不需要备份的数据。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *caches=[<span class="built_in">NSSearchPathForDirectoriesInDomains</span>(<span class="built_in">NSCachesDirectory</span>, <span class="built_in">NSUserDomainMask</span>, <span class="literal">YES</span>) lastObject];</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,caches);</span><br></pre></td></tr></table></figure>
-<p>###Library/Preferences</p>
-<p>保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录。</p>
-<p>###tmp</p>
-<p>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。</p>
+<h3 id="Library/Preferences"><a href="#Library/Preferences" class="headerlink" title="Library/Preferences"></a>Library/Preferences</h3><p>保存应用的所有偏好设置，iOS的Settings(设置)应用会在该目录中查找应用的设置信息。iTunes同步设备时会备份该目录。</p>
+<h3 id="tmp"><a href="#tmp" class="headerlink" title="tmp"></a>tmp</h3><p>保存应用运行时所需的临时数据，使用完毕后再将相应的文件从该目录删除。应用没有运行时，系统也可能会清除该目录下的文件。iTunes同步设备时不会备份该目录。</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *tmpPath = <span class="built_in">NSTemporaryDirectory</span>();</span><br><span class="line"><span class="built_in">NSLog</span>(<span class="string">@"%@"</span>,tmpPath);</span><br></pre></td></tr></table></figure>
-<p>##2.Plist文件</p>
-<p>Plist就是属性列表（Property List）的简称，是Apple公司自己发明的来存储数据的。plist文件就是将某些特定的类，通过xml文件的方式保存在目录中。</p>
+<h2 id="2-Plist_u6587_u4EF6"><a href="#2-Plist_u6587_u4EF6" class="headerlink" title="2.Plist文件"></a>2.Plist文件</h2><p>Plist就是属性列表（Property List）的简称，是Apple公司自己发明的来存储数据的。plist文件就是将某些特定的类，通过xml文件的方式保存在目录中。</p>
 <p>可以被序列化的类型只有以下几种：</p>
 <ul>
 <li><p>NSArray</p>
@@ -409,6 +395,10 @@ CoreDate
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2016/03/10/UITableView详解/" rel="prev" title="UITableView详解">
+                UITableView详解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -479,7 +469,7 @@ CoreDate
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -543,7 +533,7 @@ CoreDate
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1__u83B7_u5F97_u6587_u4EF6_u8DEF_u5F84"><span class="nav-number">1.</span> <span class="nav-text">2.1 获得文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2__u5B58_u50A8_u6570_u636E"><span class="nav-number">2.</span> <span class="nav-text">2.2 存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3__u8BFB_u53D6"><span class="nav-number">3.</span> <span class="nav-text">2.3 读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1__u5148_u83B7_u5F97NSUserDefaults_u6587_u4EF6"><span class="nav-number">4.</span> <span class="nav-text">3.1 先获得NSUserDefaults文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2__u5411_u6587_u4EF6_u4E2D_u5B58_u50A8_u6570_u636E"><span class="nav-number">5.</span> <span class="nav-text">3.2 向文件中存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3__u8BFB_u53D6_u6587_u4EF6_u4E2D_u7684_u6570_u636E"><span class="nav-number">6.</span> <span class="nav-text">3.3 读取文件中的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-NSkeyedArchiver_28_u5F52_u6863_29"><span class="nav-number"></span> <span class="nav-text">4.NSkeyedArchiver(归档)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1_u9075_u5FAANSCoding_u534F_u8BAE"><span class="nav-number">1.</span> <span class="nav-text">4.1遵循NSCoding协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1_u5BF9_u4E8E_u5B9E_u73B0_u4E86nscoding_u534F_u8BAE_u7684_u7C7B_u6765_u8BF4"><span class="nav-number">1.1.</span> <span class="nav-text">4.1.1对于实现了nscoding协议的类来说</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2_u5BF9_u4E8E_u6CA1_u6709_u5B9E_u73B0nscoding_u534F_u8BAE_u7684_u81EA_u5B9A_u4E49_u7C7B_u6765_u8BF4"><span class="nav-number">1.2.</span> <span class="nav-text">4.2对于没有实现nscoding协议的自定义类来说</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5BF9_u4E8E_u591A_u4E2A_u5BF9_u8C61_u7684_u89E3_u6863_u548C_u5F52_u6863"><span class="nav-number">1.3.</span> <span class="nav-text">对于多个对象的解档和归档</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-SQLite3"><span class="nav-number"></span> <span class="nav-text">5.SQLite3</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u524D_u8A00"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u6C99_u76D2"><span class="nav-number">2.</span> <span class="nav-text">沙盒</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_u7ED3_u6784"><span class="nav-number">2.1.</span> <span class="nav-text">1.结构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Documents"><span class="nav-number">2.1.1.</span> <span class="nav-text">Documents</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Library/Caches"><span class="nav-number">2.1.2.</span> <span class="nav-text">Library/Caches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Library/Preferences"><span class="nav-number">2.1.3.</span> <span class="nav-text">Library/Preferences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tmp"><span class="nav-number">2.1.4.</span> <span class="nav-text">tmp</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-Plist_u6587_u4EF6"><span class="nav-number">2.2.</span> <span class="nav-text">2.Plist文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1__u83B7_u5F97_u6587_u4EF6_u8DEF_u5F84"><span class="nav-number">2.2.1.</span> <span class="nav-text">2.1 获得文件路径</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2__u5B58_u50A8_u6570_u636E"><span class="nav-number">2.2.2.</span> <span class="nav-text">2.2 存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3__u8BFB_u53D6"><span class="nav-number">2.2.3.</span> <span class="nav-text">2.3 读取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1__u5148_u83B7_u5F97NSUserDefaults_u6587_u4EF6"><span class="nav-number">2.2.4.</span> <span class="nav-text">3.1 先获得NSUserDefaults文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2__u5411_u6587_u4EF6_u4E2D_u5B58_u50A8_u6570_u636E"><span class="nav-number">2.2.5.</span> <span class="nav-text">3.2 向文件中存储数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3__u8BFB_u53D6_u6587_u4EF6_u4E2D_u7684_u6570_u636E"><span class="nav-number">2.2.6.</span> <span class="nav-text">3.3 读取文件中的数据</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-NSkeyedArchiver_28_u5F52_u6863_29"><span class="nav-number">2.3.</span> <span class="nav-text">4.NSkeyedArchiver(归档)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1_u9075_u5FAANSCoding_u534F_u8BAE"><span class="nav-number">2.3.1.</span> <span class="nav-text">4.1遵循NSCoding协议</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-1_u5BF9_u4E8E_u5B9E_u73B0_u4E86nscoding_u534F_u8BAE_u7684_u7C7B_u6765_u8BF4"><span class="nav-number">2.3.1.1.</span> <span class="nav-text">4.1.1对于实现了nscoding协议的类来说</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2_u5BF9_u4E8E_u6CA1_u6709_u5B9E_u73B0nscoding_u534F_u8BAE_u7684_u81EA_u5B9A_u4E49_u7C7B_u6765_u8BF4"><span class="nav-number">2.3.1.2.</span> <span class="nav-text">4.2对于没有实现nscoding协议的自定义类来说</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u5BF9_u4E8E_u591A_u4E2A_u5BF9_u8C61_u7684_u89E3_u6863_u548C_u5F52_u6863"><span class="nav-number">2.3.1.3.</span> <span class="nav-text">对于多个对象的解档和归档</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-SQLite3"><span class="nav-number">2.4.</span> <span class="nav-text">5.SQLite3</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
