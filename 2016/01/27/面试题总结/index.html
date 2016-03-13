@@ -59,7 +59,7 @@
 <meta property="og:site_name" content="Vae">
 <meta property="og:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
 不同点：weak：表明属性定义了一种“非拥有关系”(nonowning relationsh">
-<meta property="og:updated_time" content="2016-03-01T13:27:38.000Z">
+<meta property="og:updated_time" content="2016-03-13T09:32:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结面试题">
 <meta name="twitter:description" content="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：1. 什么情况使用 weak 关键字，相比 assign 有什么不同？使用情况： 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。
@@ -416,10 +416,10 @@
 <li><p><em>Method resolution</em></p>
 <p> objc运行时会调用 +resolveInstanceMethod:或者 +resolveClassMethod:，让你有机会提供一个函数实现。如果你添加了函数，那运行时系统就会重新启动一次消息发送的过程，<br> 否则，运行时就会移到下一步，消息转发（Message Forwarding）。</p>
 </li>
-<li><p>*Fast forwarding</p>
+<li><p><em>Fast forwarding</em></p>
 <p> 如果目标对象实现了-forwardingTargetForSelector:，Runtime这时就会调用这个方法，给你把这个消息转发给其他对象的机会。只要这个方法返回的不是nil和self。整个消息发送<br> 的过程就会被重启，当然发送的对象会变成你返回的那个对象。否则，救护继续Normal Forwarding。这里叫Fast，只是为了区别下一步的转发机制。因为这一步不会创建任何新的对象，<br> 但下一步转发会创建一个NSInvocation对象，所以相对更快点。</p>
 </li>
-<li><p>*Normal forwarding</p>
+<li><p><em>Normal forwarding</em></p>
 <p> 这一步是Runtime最后一次给你挽救的机会。首先它会发送-methodSignatureForSelector:消息获得函数的参数和返回值类型。如果-<br> methodSignatureForSelector:返回nil，Runtime则会发出-<br> doesNotRecognizeSelector:消息，程序这时也就挂掉了。如果返回了一个函数签名，Runtime就会创建一个NSInvocation对象并发送-forwardInvocation:消息给目标对象。</p>
 </li>
 </ol>
@@ -432,10 +432,10 @@
 <li>成员变量的列表</li>
 <li>属性列表<br>它内部也有一个isa指针指向元对象（meta class），元对象内部存放的是类方法列表，类对象内部还有一个superclass的指针，指向他的父类对象。<br>每个objective-c对象都有相同的结构，如下图所示：<br>| <em>Objective-C 对象的结构图</em>     |<br>| ISA指针                          |<br>| 根类的实例变量                    |<br>| 倒数第二层父类的实例变量            |<br>| …                            |<br>| 父类的实例变量                    |<br>| 类的实例变量                    |</li>
 </ol>
-<h2 id="19-__u4E00_u4E2Aobjc_u5BF9_u8C61_u7684isa_u7684_u6307_u9488_u6307_u5411_u4EC0_u4E48_uFF1F_u6709_u4EC0_u4E48_u4F5C_u7528_uFF1F"><a href="#19-__u4E00_u4E2Aobjc_u5BF9_u8C61_u7684isa_u7684_u6307_u9488_u6307_u5411_u4EC0_u4E48_uFF1F_u6709_u4EC0_u4E48_u4F5C_u7528_uFF1F" class="headerlink" title="19.  一个objc对象的isa的指针指向什么？有什么作用？"></a>19.  一个objc对象的isa的指针指向什么？有什么作用？</h2><p>指向它的类对象，可以找到对象上的方法</p>
-<h2 id="20-__u4E0B_u9762_u7684_u4EE3_u7801_u8F93_u51FA_u4EC0_u4E48_uFF1F"><a href="#20-__u4E0B_u9762_u7684_u4EE3_u7801_u8F93_u51FA_u4EC0_u4E48_uFF1F" class="headerlink" title="20. 下面的代码输出什么？"></a>20. 下面的代码输出什么？</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Son</span> : <span class="title">Father</span></span></span><br><span class="line">  - (<span class="keyword">id</span>)init</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">self</span> class]));</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">super</span> class]));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
+<h2 id="19-__u4E00_u4E2Aobjc_u5BF9_u8C61_u7684isa_u7684_u6307_u9488_u6307_u5411_u4EC0_u4E48_uFF1F_u6709_u4EC0_u4E48_u4F5C_u7528_uFF1F"><a href="#19-__u4E00_u4E2Aobjc_u5BF9_u8C61_u7684isa_u7684_u6307_u9488_u6307_u5411_u4EC0_u4E48_uFF1F_u6709_u4EC0_u4E48_u4F5C_u7528_uFF1F" class="headerlink" title="19.  一个objc对象的isa的指针指向什么？有什么作用？"></a>19.  一个objc对象的isa的指针指向什么？有什么作用？</h2><p> 指向它的类对象，可以找到对象上的方法</p>
+<h2 id="20-__u4E0B_u9762_u7684_u4EE3_u7801_u8F93_u51FA_u4EC0_u4E48_uFF1F"><a href="#20-__u4E0B_u9762_u7684_u4EE3_u7801_u8F93_u51FA_u4EC0_u4E48_uFF1F" class="headerlink" title="20. 下面的代码输出什么？"></a>20. 下面的代码输出什么？</h2> <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Son</span> : <span class="title">Father</span></span></span><br><span class="line">  - (<span class="keyword">id</span>)init</span><br><span class="line">  &#123;</span><br><span class="line">      <span class="keyword">self</span> = [<span class="keyword">super</span> init];</span><br><span class="line">      <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">self</span> class]));</span><br><span class="line">          <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, <span class="built_in">NSStringFromClass</span>([<span class="keyword">super</span> class]));</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>答案：</p>
 <p>都输出 Son</p>
 <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">NSStringFromClass([<span class="variable">self</span> <span class="class"><span class="keyword">class</span>]) = <span class="title">Son</span></span></span><br><span class="line">NSStringFromClass([<span class="variable">super</span> <span class="class"><span class="keyword">class</span>]) = <span class="title">Son</span></span></span><br></pre></td></tr></table></figure>
@@ -619,7 +619,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">7</span>
+              <span class="site-state-item-count">8</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
