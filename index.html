@@ -621,119 +621,6 @@
             
               
                 
-                <a class="post-title-link" href="/2016/01/27/面试题总结/" itemprop="url">
-                  总结面试题
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2016-01-27T13:11:21+08:00" content="2016-01-27">
-              2016-01-27
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/iOS/" itemprop="url" rel="index">
-                    <span itemprop="name">iOS</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/01/27/面试题总结/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/27/面试题总结/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-         
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <h1 id="u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A"><a href="#u8FD9_u662F_u5728_u7F51_u4E0A_u770B_u5230_u4E00_u7BC7_u6587_u7AE0_u91CC_u9762_u6D89_u53CA_u5230_u7684_u9762_u8BD5_u9898_uFF0C_u73B0_u5728_u5C31_u4E2A_u4EBA_u7406_u89E3_uFF0C_u6574_u7406_u5982_u4E0B_uFF1A" class="headerlink" title="这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下："></a>这是在网上看到一篇文章里面涉及到的面试题，现在就个人理解，整理如下：</h1><h2 id="1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F"><a href="#1-__u4EC0_u4E48_u60C5_u51B5_u4F7F_u7528_weak__u5173_u952E_u5B57_uFF0C_u76F8_u6BD4_assign__u6709_u4EC0_u4E48_u4E0D_u540C_uFF1F" class="headerlink" title="1. 什么情况使用 weak 关键字，相比 assign 有什么不同？"></a>1. 什么情况使用 weak 关键字，相比 assign 有什么不同？</h2><p><em>使用情况：</em><br> 在ARC中，为了解决一些对象循环引用的问题，需要一端为weak，比如说代理属性delegate.一般自定义控件IBOutlet的属性时候也会设置为weak。</p>
-<p><em>不同点：</em><br>weak：表明属性定义了一种“非拥有关系”(nonowning relationship)。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质与assign类似，然而在属性所指的对象到摧毁时，属性也会清空。</p>
-<p>assign 的“设置方法”只会执行针对“纯量类型”（scalar type，例如CGFloat 或 NSInteger等）的简单赋值操作。</p>
-<h2 id="2-__u600E_u4E48_u7528_copy__u5173_u952E_u5B57_uFF1F"><a href="#2-__u600E_u4E48_u7528_copy__u5173_u952E_u5B57_uFF1F" class="headerlink" title="2. 怎么用 copy 关键字？"></a>2. 怎么用 copy 关键字？</h2><p><em>用途：</em></p>
-<ol>
-<li><p>NSString、NSArray、NSDictionary等等经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary；他们之间可能进行赋<br>值操作，为确保对象中的字符串值不会无意间变动，应该在设置新属性值时拷贝一份。</p>
-</li>
-<li><p>block也经常使用copy关键字。<br>block 使用 copy 是从 MRC 遗留下来的“传统”,在 MRC 中,方法内部的 block 是在栈区的,使用 copy 可以把它放到堆区.在 ARC 中写不写都行：对于 block 使用 copy 还是 strong<br>效果是一样的，但写上 copy 也无伤大雅，还能时刻提醒我们：编译器自动对 block 进行了 copy 操作。如果不写 copy ，该类的调用者有可能会忘记或者根本不知道“编译器会自动对<br>block 进行了 copy 操作”，他们有可能会在调用之前自行拷贝属性值。这种操作多余而低效。</p>
-</li>
-</ol>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/01/27/面试题总结/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
                 <a class="post-title-link" href="/2016/01/13/子网掩码详解/" itemprop="url">
                   子网掩码详解(转)
                 </a>
@@ -1207,7 +1094,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-count">7</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
