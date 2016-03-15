@@ -58,7 +58,7 @@
 <meta property="og:url" content="vaexiaochang.cn/2016/03/15/C语言学习整理（一）/index.html">
 <meta property="og:site_name" content="Vae">
 <meta property="og:description" content="前言：以前的笔记都是记在印象笔记上，现在有了博客以后，打算把自己以前的C语言的笔记整理下做个总结吧。刚开始学习C语言的时候，觉得云里雾里特别是到了指针以后，不过后来看了C语言三剑客以后对C语言有了一个更深刻的认识。有的人以为C语言是一种特别简单的语言，就是几个运算符加上循环语句的话，那么我只能说你C语言的皮毛都没摸到。在几十年以来C语言一直占据着编程语言前三的位置，包括现在的主流的操作系统内核都是">
-<meta property="og:updated_time" content="2016-03-15T10:42:36.000Z">
+<meta property="og:updated_time" content="2016-03-15T13:23:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习整理（一）">
 <meta name="twitter:description" content="前言：以前的笔记都是记在印象笔记上，现在有了博客以后，打算把自己以前的C语言的笔记整理下做个总结吧。刚开始学习C语言的时候，觉得云里雾里特别是到了指针以后，不过后来看了C语言三剑客以后对C语言有了一个更深刻的认识。有的人以为C语言是一种特别简单的语言，就是几个运算符加上循环语句的话，那么我只能说你C语言的皮毛都没摸到。在几十年以来C语言一直占据着编程语言前三的位置，包括现在的主流的操作系统内核都是">
@@ -273,8 +273,7 @@
 <h1 id="C_u8BED_u8A00_u7684_u601D_u60F3"><a href="#C_u8BED_u8A00_u7684_u601D_u60F3" class="headerlink" title="C语言的思想"></a>C语言的思想</h1><p>我们经常听到c++，java等语言用到了面向对象的思想，那么C语言用到了什么思想呢？C语言是用到了面向过程的思想，那么我先不说面向对象的思想，毕竟这不是重点。重点是面向过程：首先我们得理解我们是用计算机编写程序，计算机并不是人，并不能举一反三，只有我们将所有的情况都告诉它，它才能处理一些相关的问题，而且计算机思维是很死板的。所以我们用面向过程的思想去编程的时候，<strong>就要考虑每一步是怎么做的，而计算机也会按照你所给的指令，一步一步的去执行你输入的代码</strong>。</p>
 <p><em>举个栗子：</em></p>
 <pre><code>你去餐馆吃饭，你告诉服务员去倒杯水你。但是用面向过程来解释就不是说一句话那么简单了，你得首先告诉服务员，去拿一个杯子，然后拿这个杯子去厨房倒一杯水，然后将水放在你的桌子上。是不是很麻烦，对，面向过程就是要让你把每一步的过程都告诉它。
-</code></pre><p>#初识C语言</p>
-<p>一般我们开始写C语言的时候，老师一般告我们打开编辑器，然后在编辑框里面输入下面的程序。</p>
+</code></pre><h1 id="u521D_u8BC6C_u8BED_u8A00"><a href="#u521D_u8BC6C_u8BED_u8A00" class="headerlink" title="初识C语言"></a>初识C语言</h1><p>一般我们开始写C语言的时候，老师一般告我们打开编辑器，然后在编辑框里面输入下面的程序。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line">	</span><br><span class="line">	<span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line">	</span>&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"hello world!"</span>);</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 <p>上面看似一个很简单的程序，但是刚开始的时候我们都不懂这一大堆的单词的组合是什么意思。好吧，从头开始，（我这篇文章是基于有一定基础的人看的，不要问我怎么搭建环境）.</p>
 <h2 id="23include"><a href="#23include" class="headerlink" title="#include"></a><em>#include<stdio.h></stdio.h></em></h2><p>前面的include的C语言的预编译指令，#include 这个指令的作用是把另一个文件的内容引入到本文件中，在许多情况下这个功能可以方便代码的管理，也节省了磁盘空间。#include<stdio.h> 指令的作用是引入 stdio.h 文件，它是 C 语言标准库中的一个文件，<strong>声明了跟标准输入输出相关的函数和变量</strong>。</stdio.h></p>
@@ -467,7 +466,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C_u8BED_u8A00_u7684_u601D_u60F3"><span class="nav-number">1.</span> <span class="nav-text">C语言的思想</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#23include"><span class="nav-number">1.1.</span> <span class="nav-text">#include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int_main_28_29"><span class="nav-number">1.2.</span> <span class="nav-text">int main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf_28_u201Chello_world_u201D_29_3B"><span class="nav-number">1.3.</span> <span class="nav-text">printf(“hello world”);</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#C_u8BED_u8A00_u7684_u601D_u60F3"><span class="nav-number">1.</span> <span class="nav-text">C语言的思想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u521D_u8BC6C_u8BED_u8A00"><span class="nav-number">2.</span> <span class="nav-text">初识C语言</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#23include"><span class="nav-number">2.1.</span> <span class="nav-text">#include</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int_main_28_29"><span class="nav-number">2.2.</span> <span class="nav-text">int main()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#printf_28_u201Chello_world_u201D_29_3B"><span class="nav-number">2.3.</span> <span class="nav-text">printf(“hello world”);</span></a></li></ol></li></ol></div>
             
           </div>
           <div class="post-toc-indicator-bottom post-toc-indicator">
