@@ -221,6 +221,172 @@
             
               
                 
+                <a class="post-title-link" href="/2016/03/17/C语言学习整理（二）/" itemprop="url">
+                  C语言学习整理（二）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T21:24:19+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/C语言学习整理（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/C语言学习整理（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        
+          <p>前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。</p>
+<h1 id="u53D8_u91CF_u662F_u4EC0_u4E48"><a href="#u53D8_u91CF_u662F_u4EC0_u4E48" class="headerlink" title="变量是什么"></a>变量是什么</h1><p>顾名思义，变量就是可以改变的量，与之相对应的就是常量，那么同样可以知道不能对常量做出修改。其实保存常量的容器就是变量。</p>
+<p>那么常见的变量的类型有以下几种（64位编译器）：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">声明类型</th>
+<th style="text-align:right">所占字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整型</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>单精度浮点型</td>
+<td style="text-align:center">float</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>双精度浮点型</td>
+<td style="text-align:center">double</td>
+<td style="text-align:right">8字节</td>
+</tr>
+<tr>
+<td>字符</td>
+<td style="text-align:center">char</td>
+<td style="text-align:right">1字节</td>
+</tr>
+<tr>
+<td>无符号整型</td>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>长整型</td>
+<td style="text-align:center">long int</td>
+<td style="text-align:right">8字节</td>
+</tr>
+<tr>
+<td>指针类型</td>
+<td style="text-align:center">char*</td>
+<td style="text-align:right">8字节</td>
+</tr>
+</tbody>
+</table>
+<p>以上只是给出64位环境下字节数，随着编译器的不同，可能有的有的变化。C标准中并没有具体给出规定那个基本类型应该是多少字节数，而且这个也与机器、OS、编译器有关，比如同样是在32bits的操作系统系，VC++的编译器下int类型为占4个字节；而tuborC下则是2个字节。</p>
+<p>#变量的声明与定义</p>
+<p>一般情况下，我们可以这样理解，在内存中开辟了空间称为<strong>定义</strong>，而不需要申请内存的称为<strong>声明</strong>。</p>
+<p>准确的说的话。变量的声明（declaration）分为两种：</p>
+<ol>
+<li>一种是需要建立存储空间的。例如：我们在程序中写 int a； 那么在声明的时候就已经建立的存储控件了。这种声明是<strong>定义性声明</strong>，即我们平时说的<strong>“定义”</strong>。</li>
+<li>另一种是不需要建立存储控件的，只是告诉编译器某变量已经在别处定义过了。例如：我们在程序中写 extern int a；其中 extern 关键字就是告诉编译器变量a已经在别处定义过了。这种声明是<strong>引用性声明</strong>。即我们平时所说的<strong>*“声明”</strong>。</li>
+</ol>
+<p>我这样说可能有些人要晕了，觉得变量的声明和定义到底有什么区别。其实从广义角度上讲，<strong>声明中包含着定义，而并非所有的声明都是定义</strong>。也是说<em>定义性声明</em>既是定义又是声明，而<em>引用性声明</em>只是声明。</p>
+<p>举个栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;				<span class="comment">//定义性声明，分配存储空间，初值不确定 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">0</span>;			<span class="comment">//定义性声明，分配存储空间，赋初值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> c;		<span class="comment">//引用性声明，不分配存储空间，只是告诉编译器变量c在别处定义了</span></span><br></pre></td></tr></table></figure>
+<p>最后一点在一个作用域中可以重复声明，但是不能重复定义。</p>
+<h1 id="u53D8_u91CF_u7684_u4F7F_u7528"><a href="#u53D8_u91CF_u7684_u4F7F_u7528" class="headerlink" title="变量的使用"></a>变量的使用</h1><p>变量只有定义了以后才能经行初始化，初始化后才可以调用，千万不能调用一个没有经过初始化的变量，最终的输出结果是不确定的。</p>
+<p>变量的修改，可以修改变量的值，多次覆盖以赋值。使用占位符输出变量。</p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/17/C语言学习整理（二）/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/03/15/C语言学习整理（一）/" itemprop="url">
                   C语言学习整理（一）
                 </a>
@@ -1287,115 +1453,14 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/12/29/first/" itemprop="url">
-                  first
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            发表于
-            <time itemprop="dateCreated" datetime="2015-12-29T16:21:03+08:00" content="2015-12-29">
-              2015-12-29
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp; 分类于
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/日志/" itemprop="url" rel="index">
-                    <span itemprop="name">日志</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2015/12/29/first/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/29/first/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-         
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body">
-
-      
-      
-
-      
-        
-          <span itemprop="articleBody">
-            
-              <p>这是<strong>新的开始</strong>，我用hexo创建了第一篇文章<br>通过下面的命令，就可以创建新文章<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vaedeMacBook-Pro:chouchang<span class="class">.github</span><span class="class">.io</span> vae$ hexo new <span class="string">"first"</span></span><br><span class="line">INFO  Created: ~/myblog/chouchang<span class="class">.github</span><span class="class">.io</span>/source/_posts/first.md</span><br></pre></td></tr></table></figure></p>
-<p>总算是弄好了这个问题了，这两天一直在研究怎么样去创建自己的个人博客。</p>
-
-            
-          </span>
-        
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
 
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
         </div>
@@ -1434,7 +1499,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">10</span>
+              <span class="site-state-item-count">11</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

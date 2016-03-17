@@ -1,0 +1,870 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="96ypaMzFDVwkClNJqeszPCdDhAzWlNALvTNdOIl6gBg" />
+<meta name="baidu-site-verification" content="gaTPsggfLS" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。
+变量是什么顾名思义，变量就是可以改变的量，与之相对应的就是常量，那么同样可以知道不能对常量做出修改。其实保存常量的容器就是变量。
+那么常见的变量的类型有以下几种（64位编译器）：
+
+
+
+名称
+声明类型
+所占字节数
+
+
+
+
+整型
+int
+4字节
+
+
+单精度浮点型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C语言学习整理（二）">
+<meta property="og:url" content="vaexiaochang.cn/2016/03/17/C语言学习整理（二）/index.html">
+<meta property="og:site_name" content="Vae">
+<meta property="og:description" content="前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。
+变量是什么顾名思义，变量就是可以改变的量，与之相对应的就是常量，那么同样可以知道不能对常量做出修改。其实保存常量的容器就是变量。
+那么常见的变量的类型有以下几种（64位编译器）：
+
+
+
+名称
+声明类型
+所占字节数
+
+
+
+
+整型
+int
+4字节
+
+
+单精度浮点型">
+<meta property="og:updated_time" content="2016-03-17T14:50:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C语言学习整理（二）">
+<meta name="twitter:description" content="前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。
+变量是什么顾名思义，变量就是可以改变的量，与之相对应的就是常量，那么同样可以知道不能对常量做出修改。其实保存常量的容器就是变量。
+那么常见的变量的类型有以下几种（64位编译器）：
+
+
+
+名称
+声明类型
+所占字节数
+
+
+
+
+整型
+int
+4字节
+
+
+单精度浮点型">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> C语言学习整理（二） | Vae </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vae</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">现在开始认真的去做一些事</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                C语言学习整理（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-03-17T21:24:19+08:00" content="2016-03-17">
+              2016-03-17
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/C语言/" itemprop="url" rel="index">
+                    <span itemprop="name">C语言</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/03/17/C语言学习整理（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/17/C语言学习整理（二）/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><p>前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。</p>
+<h1 id="u53D8_u91CF_u662F_u4EC0_u4E48"><a href="#u53D8_u91CF_u662F_u4EC0_u4E48" class="headerlink" title="变量是什么"></a>变量是什么</h1><p>顾名思义，变量就是可以改变的量，与之相对应的就是常量，那么同样可以知道不能对常量做出修改。其实保存常量的容器就是变量。</p>
+<p>那么常见的变量的类型有以下几种（64位编译器）：</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th style="text-align:center">声明类型</th>
+<th style="text-align:right">所占字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>整型</td>
+<td style="text-align:center">int</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>单精度浮点型</td>
+<td style="text-align:center">float</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>双精度浮点型</td>
+<td style="text-align:center">double</td>
+<td style="text-align:right">8字节</td>
+</tr>
+<tr>
+<td>字符</td>
+<td style="text-align:center">char</td>
+<td style="text-align:right">1字节</td>
+</tr>
+<tr>
+<td>无符号整型</td>
+<td style="text-align:center">unsigned int</td>
+<td style="text-align:right">4字节</td>
+</tr>
+<tr>
+<td>长整型</td>
+<td style="text-align:center">long int</td>
+<td style="text-align:right">8字节</td>
+</tr>
+<tr>
+<td>指针类型</td>
+<td style="text-align:center">char*</td>
+<td style="text-align:right">8字节</td>
+</tr>
+</tbody>
+</table>
+<p>以上只是给出64位环境下字节数，随着编译器的不同，可能有的有的变化。C标准中并没有具体给出规定那个基本类型应该是多少字节数，而且这个也与机器、OS、编译器有关，比如同样是在32bits的操作系统系，VC++的编译器下int类型为占4个字节；而tuborC下则是2个字节。</p>
+<p>#变量的声明与定义</p>
+<p>一般情况下，我们可以这样理解，在内存中开辟了空间称为<strong>定义</strong>，而不需要申请内存的称为<strong>声明</strong>。</p>
+<p>准确的说的话。变量的声明（declaration）分为两种：</p>
+<ol>
+<li>一种是需要建立存储空间的。例如：我们在程序中写 int a； 那么在声明的时候就已经建立的存储控件了。这种声明是<strong>定义性声明</strong>，即我们平时说的<strong>“定义”</strong>。</li>
+<li>另一种是不需要建立存储控件的，只是告诉编译器某变量已经在别处定义过了。例如：我们在程序中写 extern int a；其中 extern 关键字就是告诉编译器变量a已经在别处定义过了。这种声明是<strong>引用性声明</strong>。即我们平时所说的<strong>*“声明”</strong>。</li>
+</ol>
+<p>我这样说可能有些人要晕了，觉得变量的声明和定义到底有什么区别。其实从广义角度上讲，<strong>声明中包含着定义，而并非所有的声明都是定义</strong>。也是说<em>定义性声明</em>既是定义又是声明，而<em>引用性声明</em>只是声明。</p>
+<p>举个栗子：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a;				<span class="comment">//定义性声明，分配存储空间，初值不确定 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> b = <span class="number">0</span>;			<span class="comment">//定义性声明，分配存储空间，赋初值</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">extern</span> <span class="keyword">int</span> c;		<span class="comment">//引用性声明，不分配存储空间，只是告诉编译器变量c在别处定义了</span></span><br></pre></td></tr></table></figure>
+<p>最后一点在一个作用域中可以重复声明，但是不能重复定义。</p>
+<h1 id="u53D8_u91CF_u7684_u4F7F_u7528"><a href="#u53D8_u91CF_u7684_u4F7F_u7528" class="headerlink" title="变量的使用"></a>变量的使用</h1><p>变量只有定义了以后才能经行初始化，初始化后才可以调用，千万不能调用一个没有经过初始化的变量，最终的输出结果是不确定的。</p>
+<p>变量的修改，可以修改变量的值，多次覆盖以赋值。使用占位符输出变量。</p>
+<a id="more"></a>
+<p>#变量的作用域</p>
+<p>作用域是指可以存取变量的代码范围。如果超出这个范围就不能取到变量的值。<br>一般的变量的作用域：从定义那一行开始一直到其所在的大括号的结束为止。</p>
+<p>在相同的作用域内不可以有同名的变量，也就是上面说的重复定义问题。</p>
+<p>在代码块的外部是不能访问代码块内部定义的变量。而代码块的内部是可以访问外部代码块定义的变量。因为在内部所有的变量都在外部的大括号下，所以可以访问。<br>如果内部代码块中定义了和外部代码块相同变量名的变量，那么在内部代码块中这个变量的作用域内，内部的变量会覆盖外部代码块所定义的变量。但是外部代码块中变量的值不受内部代码块的改变而改变。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,harry);</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">20</span>;</span><br><span class="line">      </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果是：<br>10<br>20<br>10</p>
+<p>说作用域之后我们再清楚下全局变量和局部变量。</p>
+<ul>
+<li><p>局部变量：也称为内部变量。局部变量是在函数内作定义说明的。其作用域仅限于函数内， 离开该函数后再使用这种变量是非法的。</p>
+</li>
+<li><p>全局变量也称为外部变量，它是在函数外部定义的变量。 它不属于哪一个函数，它属于一个源程序文件。其作用域是整个源程序。</p>
+</li>
+</ul>
+<h1 id="u53D8_u91CF_u7684_u5B58_u50A8_u7C7B_u578B"><a href="#u53D8_u91CF_u7684_u5B58_u50A8_u7C7B_u578B" class="headerlink" title="变量的存储类型"></a>变量的存储类型</h1><h2 id="u5B58_u50A8_u65B9_u5F0F"><a href="#u5B58_u50A8_u65B9_u5F0F" class="headerlink" title="存储方式"></a>存储方式</h2><p>变量的存储类型我们从变量的作用域（从空间上）角度来分，可以分为全局变量和局部变量。</p>
+<p>从另外一个角度，从变量值存在的作用时间（即生存期）角度来分，可以分为静态存储和动态存储方式。</p>
+<ul>
+<li>静态存储：是指在程序的运行期间分配固定的存储空间的方式。</li>
+<li>动态存储：是在程序运行期间根据需要进行动态的分配存储空间的方式。</li>
+</ul>
+<p>用户的存储空间可以分为3个部分：</p>
+<ul>
+<li>程序区。</li>
+<li>静态存储区。</li>
+<li>动态存储区。</li>
+</ul>
+<p>全局变量全部存放在静态存储区，在程序开始执行时给全局变量分配存储区，程序行完毕就释放。在程序执行过程中它们占据固定的存储单元，而不动态地进行分配和释放。</p>
+<p>动态存储区存放以下数据：</p>
+<ul>
+<li>函数形式参数；</li>
+<li>自动变量（未加static声明的局部变量）；</li>
+<li>函数调用实的现场保护和返回地址。</li>
+</ul>
+<p>对以上这些数据，在函数开始调用时分配动态存储空间，函数结束时释放这些空间。</p>
+<h2 id="u5B58_u50A8_u7C7B_u522B"><a href="#u5B58_u50A8_u7C7B_u522B" class="headerlink" title="存储类别"></a>存储类别</h2><p>在C语言中，每个变量和函数都有两个属性，数据类型和数据的存储类型。</p>
+<h3 id="auto_u53D8_u91CF"><a href="#auto_u53D8_u91CF" class="headerlink" title="auto变量"></a>auto变量</h3><p>函数中的局部变量，如不专门声明为static存储类别，都是动态地分配存储空间的，数据存储在动态存储区中。函数中的形参和在函数中定义的变量（包括在复合语句中定义的变量），都属此类，在调用该函数时系统会给它们分配存储空间，在函数调用结束时就自动释放这些存储空间。这类局部变量称为自动变量。自动变量用关键字auto作存储类别的声明。例如：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">f</span><span class="params">(<span class="keyword">int</span> a)</span></span>&#123;  <span class="comment">/* 定义f函数，a为参数 */</span></span><br><span class="line">    <span class="keyword">auto</span> <span class="keyword">int</span> b,c=<span class="number">3</span>;  <span class="comment">/*定义b，c自动变量*/</span></span><br><span class="line">    <span class="comment">/* …… */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>一般的auto关键字我们不需要显示声明，都可以省略.</p>
+<h3 id="static_u58F0_u660E_u5C40_u90E8_u53D8_u91CF"><a href="#static_u58F0_u660E_u5C40_u90E8_u53D8_u91CF" class="headerlink" title="static声明局部变量"></a>static声明局部变量</h3><p><strong>有时希望函数中的局部变量的值在函数调用结束后不消失而保留原值，这时就应该指定局部变量为“静态局部变量”，用关键字static进行声明。</strong></p>
+<p>对静态局部变量的说明：</p>
+<ol>
+<li>静态局部变量属于静态存储类别，在静态存储区内分配存储单元。在程序整个运行期间都不释放。而自动变量（即动态局部变量）属于动态存储类别，占动态存储空间，函数调用结束后即释放。</li>
+<li>静态局部变量在编译时赋初值，即只赋初值一次；而对自动变量赋初值是在函数调用时进行，每调用一次函数重新给一次初值，相当于执行一次赋值语句。</li>
+<li>如果在定义局部变量时不赋初值的话，则对静态局部变量来说，编译时自动赋初值0（对数值型变量）或空字符（对字符变量）。而对自动变量来说，如果不赋初值则它的值是一个不确定的值。</li>
+</ol>
+<p>###register变量<br><strong>为了提高效率，C语言允许将局部变量得值放在CPU中的寄存器中，这种变量叫“寄存器变量”，用关键字register作声明。</strong></p>
+<p>对寄存器变量的几点说明：</p>
+<ul>
+<li>只有局部自动变量和形式参数可以作为寄存器变量；</li>
+<li>一个计算机系统中的寄存器数目有限，不能定义任意多个寄存器变量；</li>
+<li>局部静态变量不能定义为寄存器变量。</li>
+</ul>
+<p>###extern声明外部变量<br>如果在某个文件中想调用另一个文件中的变量，则必须声明该变量为外部变量，例如<br>：extern int a；a已经在另一个文件中定义，我们只需声明便可以使用。还有注意的一点是它的作用域为从变量定义处开始，到本程序文件的末尾。<strong>如果你想在定义点之前的函数想引用该外部变量，则应该在引用之前用关键字extern对该变量作“外部变量声明”。</strong>表示该变量是一个已经定义的外部变量。有了此声明，就可以从“声明”处起，合法地使用该外部变量。</p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/15/C语言学习整理（一）/" rel="next" title="C语言学习整理（一）">
+                <i class="fa fa-chevron-left"></i> C语言学习整理（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/03/17/C语言学习整理（二）/"
+           data-title="C语言学习整理（二）" data-url="vaexiaochang.cn/2016/03/17/C语言学习整理（二）/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/ico.jpg" alt="zhouchang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhouchang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">我怎敢倒下，我身后空无一人。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">11</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chouchang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3562983664" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u53D8_u91CF_u662F_u4EC0_u4E48"><span class="nav-number">1.</span> <span class="nav-text">变量是什么</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u53D8_u91CF_u7684_u4F7F_u7528"><span class="nav-number">2.</span> <span class="nav-text">变量的使用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u53D8_u91CF_u7684_u5B58_u50A8_u7C7B_u578B"><span class="nav-number">3.</span> <span class="nav-text">变量的存储类型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B58_u50A8_u65B9_u5F0F"><span class="nav-number">3.1.</span> <span class="nav-text">存储方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5B58_u50A8_u7C7B_u522B"><span class="nav-number">3.2.</span> <span class="nav-text">存储类别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#auto_u53D8_u91CF"><span class="nav-number">3.2.1.</span> <span class="nav-text">auto变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static_u58F0_u660E_u5C40_u90E8_u53D8_u91CF"><span class="nav-number">3.2.2.</span> <span class="nav-text">static声明局部变量</span></a></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouchang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vaexiaochang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
