@@ -104,7 +104,7 @@ float
 
 
 双精">
-<meta property="og:updated_time" content="2016-03-17T14:54:16.000Z">
+<meta property="og:updated_time" content="2016-03-18T05:05:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C语言学习整理（二）">
 <meta name="twitter:description" content="前言：上一篇可能开篇，讲的东西过于浅显，还有我本来打算全都整理一下的，但是发现细小的细节太多，全都写出来也不现实，所以抓住主要的整理吧。
@@ -391,8 +391,8 @@ float
 <h1 id="u53D8_u91CF_u7684_u58F0_u660E_u4E0E_u5B9A_u4E49"><a href="#u53D8_u91CF_u7684_u58F0_u660E_u4E0E_u5B9A_u4E49" class="headerlink" title="变量的声明与定义"></a>变量的声明与定义</h1><p>一般情况下，我们可以这样理解，在内存中开辟了空间称为<strong>定义</strong>，而不需要申请内存的称为<strong>声明</strong>。</p>
 <p>准确的说的话。变量的声明（declaration）分为两种：</p>
 <ol>
-<li>一种是需要建立存储空间的。例如：我们在程序中写 int a； 那么在声明的时候就已经建立的存储控件了。这种声明是<strong>定义性声明</strong>，即我们平时说的<strong>“定义”</strong>。</li>
-<li>另一种是不需要建立存储控件的，只是告诉编译器某变量已经在别处定义过了。例如：我们在程序中写 extern int a；其中 extern 关键字就是告诉编译器变量a已经在别处定义过了。这种声明是<strong>引用性声明</strong>。即我们平时所说的<strong>*“声明”</strong>。</li>
+<li>一种是需要建立存储空间的。例如：我们在程序中写 int a； 那么在声明的时候就已经建立的存储空间了。这种声明是<strong>定义性声明</strong>，即我们平时说的<strong>“定义”</strong>。</li>
+<li>另一种是不需要建立存储空间的，只是告诉编译器某变量已经在别处定义过了。例如：我们在程序中写 extern int a；其中 extern 关键字就是告诉编译器变量a已经在别处定义过了。这种声明是<strong>引用性声明</strong>。即我们平时所说的<strong>*“声明”</strong>。</li>
 </ol>
 <p>我这样说可能有些人要晕了，觉得变量的声明和定义到底有什么区别。其实从广义角度上讲，<strong>声明中包含着定义，而并非所有的声明都是定义</strong>。也是说<em>定义性声明</em>既是定义又是声明，而<em>引用性声明</em>只是声明。</p>
 <p>举个栗子：</p>
@@ -404,7 +404,7 @@ float
 <h1 id="u53D8_u91CF_u7684_u4F5C_u7528_u57DF"><a href="#u53D8_u91CF_u7684_u4F5C_u7528_u57DF" class="headerlink" title="变量的作用域"></a>变量的作用域</h1><p>作用域是指可以存取变量的代码范围。如果超出这个范围就不能取到变量的值。<br>一般的变量的作用域：从定义那一行开始一直到其所在的大括号的结束为止。</p>
 <p>在相同的作用域内不可以有同名的变量，也就是上面说的重复定义问题。</p>
 <p>在代码块的外部是不能访问代码块内部定义的变量。而代码块的内部是可以访问外部代码块定义的变量。因为在内部所有的变量都在外部的大括号下，所以可以访问。<br>如果内部代码块中定义了和外部代码块相同变量名的变量，那么在内部代码块中这个变量的作用域内，内部的变量会覆盖外部代码块所定义的变量。但是外部代码块中变量的值不受内部代码块的改变而改变。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,harry);</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">20</span>;</span><br><span class="line">      </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">const</span> <span class="keyword">char</span> * argv[])</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">10</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">20</span>;</span><br><span class="line">      </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d\n"</span>,a);</span><br><span class="line">       <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出结果是：<br>10<br>20<br>10</p>
 <p>说作用域之后我们再清楚下全局变量和局部变量。</p>
 <ul>
