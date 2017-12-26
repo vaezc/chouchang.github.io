@@ -1,0 +1,762 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="96ypaMzFDVwkClNJqeszPCdDhAzWlNALvTNdOIl6gBg" />
+<meta name="baidu-site-verification" content="gaTPsggfLS" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="iOS,笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="NSOperation详解NSOperation是什么?NSOperation 是oc中多线程技术的一种，是基于 GCD 做的面向对象的封装。相比较与GCD的使用更为简单，并且提供了一些用GCD不是很好实现的功能：
+
+取消在任务处理队列中的任务
+添加任务间的依赖关系
+设置任务的最大并发数
+提供了任务的状态：isExecuteing, isFinished.
+
+NSOperation的主要特点NSO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NSOperation详解">
+<meta property="og:url" content="vaexiaochang.cn/2016/07/19/NSOperation详解/index.html">
+<meta property="og:site_name" content="Vae">
+<meta property="og:description" content="NSOperation详解NSOperation是什么?NSOperation 是oc中多线程技术的一种，是基于 GCD 做的面向对象的封装。相比较与GCD的使用更为简单，并且提供了一些用GCD不是很好实现的功能：
+
+取消在任务处理队列中的任务
+添加任务间的依赖关系
+设置任务的最大并发数
+提供了任务的状态：isExecuteing, isFinished.
+
+NSOperation的主要特点NSO">
+<meta property="og:updated_time" content="2016-07-19T15:23:58.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NSOperation详解">
+<meta name="twitter:description" content="NSOperation详解NSOperation是什么?NSOperation 是oc中多线程技术的一种，是基于 GCD 做的面向对象的封装。相比较与GCD的使用更为简单，并且提供了一些用GCD不是很好实现的功能：
+
+取消在任务处理队列中的任务
+添加任务间的依赖关系
+设置任务的最大并发数
+提供了任务的状态：isExecuteing, isFinished.
+
+NSOperation的主要特点NSO">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> NSOperation详解 | Vae </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vae</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">现在开始认真的去做一些事</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                NSOperation详解
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-07-19T23:10:23+08:00" content="2016-07-19">
+              2016-07-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/07/19/NSOperation详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/19/NSOperation详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="NSOperation_u8BE6_u89E3"><a href="#NSOperation_u8BE6_u89E3" class="headerlink" title="NSOperation详解"></a>NSOperation详解</h1><h2 id="NSOperation_u662F_u4EC0_u4E48_3F"><a href="#NSOperation_u662F_u4EC0_u4E48_3F" class="headerlink" title="NSOperation是什么?"></a>NSOperation是什么?</h2><p>NSOperation 是oc中多线程技术的一种，是基于 GCD 做的面向对象的封装。相比较与GCD的使用更为简单，并且提供了一些用GCD不是很好实现的功能：</p>
+<ul>
+<li>取消在任务处理队列中的任务</li>
+<li>添加任务间的依赖关系</li>
+<li>设置任务的最大并发数</li>
+<li>提供了任务的状态：isExecuteing, isFinished.</li>
+</ul>
+<h3 id="NSOperation_u7684_u4E3B_u8981_u7279_u70B9"><a href="#NSOperation_u7684_u4E3B_u8981_u7279_u70B9" class="headerlink" title="NSOperation的主要特点"></a>NSOperation的主要特点</h3><p>NSOperation是一个抽象类，不能直接使用，要实现它的子类才可以使用。实现NSOperation子类的方式有3种：</p>
+<ol>
+<li>NSInvocationOperation</li>
+<li>NSBlockOperation</li>
+<li>自定义子类继承NSOperation，实现内部相应的方法</li>
+</ol>
+<p>NSOperation的一些主要属性</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">property</span><span class="title"> </span>(readonly, <span class="variable">getter=</span>isCancelled) BOOL cancelled;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">property</span><span class="title"> </span>(readonly, <span class="variable">getter=</span>isExecuting) BOOL executing;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">property</span><span class="title"> </span>(readonly, <span class="variable">getter=</span>isFinished) BOOL finished;</span><br></pre></td></tr></table></figure>
+<p>属性的基本使用会在下面说到。</p>
+<h2 id="u5982_u4F55_u4F7F_u7528NSOperation"><a href="#u5982_u4F55_u4F7F_u7528NSOperation" class="headerlink" title="如何使用NSOperation"></a>如何使用NSOperation</h2><p>按照之前讲述的NSOperation是一个抽象类，所以我们使用时，必须用其子类才可以使用：<br>先看一个小例子：</p>
+<h3 id="NSInvocationOperation"><a href="#NSInvocationOperation" class="headerlink" title="NSInvocationOperation"></a>NSInvocationOperation</h3><p>使用的时候我们可以直接创建操作，然后启动就可以了，操作会在当前线程中<strong>同步执行</strong>任务。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NSOperation *operation = [[NSInvocationOperation alloc] <span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">doSomeThings:</span>) <span class="string">object:</span>@<span class="string">"Invocation"</span>];</span><br><span class="line">    </span><br><span class="line">[operation start];</span><br></pre></td></tr></table></figure>
+<p>我们在GCD中并发（全局）队列使用的最多，所以NSOperation直接把GCD里面的并发队列封装起来。NSOperationQueue队列，本质上就是GCD的并发队列。<br>我们还可以将操作放到队列中，只要将操作添加到队列，操作会自动<strong>异步执行</strong>调度方法。</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">NSOperation *operation = [[NSInvocationOperation alloc]<span class="string">initWithTarget:</span>self <span class="string">selector:</span><span class="annotation">@selector</span>(<span class="string">doSomeThings:</span>) <span class="string">object:</span>@<span class="string">"Invocation"</span>];</span><br><span class="line"></span><br><span class="line">NSOperationQueue *queue = [[NSOperationQueue alloc] init];</span><br><span class="line">[queue <span class="string">addOperation:</span>operation];</span><br></pre></td></tr></table></figure>
+<h3 id="NSBlockOperation"><a href="#NSBlockOperation" class="headerlink" title="NSBlockOperation"></a>NSBlockOperation</h3><p>NSBlockOperation使用时是直接将block中的操作放到异步执行。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSOperationQueue</span> *queue = [[<span class="built_in">NSOperationQueue</span> alloc] init];</span><br><span class="line"><span class="built_in">NSBlockOperation</span> * operation = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">			</span><br><span class="line">            <span class="built_in">NSLog</span>(<span class="string">@"%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">&#125;];</span><br><span class="line">[queue addOperation:operation];</span><br></pre></td></tr></table></figure>
+<p>线程间通信</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSOperationQueue</span> *queue = [[<span class="built_in">NSOperationQueue</span> alloc]init];</span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">[queue addOperationWithBlock:^&#123;</span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"耗时操作....%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">       </span><br><span class="line">    <span class="comment">// 在主线程更新UI</span></span><br><span class="line">      [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperationWithBlock:^&#123;</span><br><span class="line">           <span class="built_in">NSLog</span>(<span class="string">@"更新UI....%@"</span>, [<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">      &#125;];</span><br><span class="line"> &#125;];</span><br></pre></td></tr></table></figure>
+<h3 id="u81EA_u5B9A_u4E49_u5B50_u7C7B_u7EE7_u627FNSOperation"><a href="#u81EA_u5B9A_u4E49_u5B50_u7C7B_u7EE7_u627FNSOperation" class="headerlink" title="自定义子类继承NSOperation"></a>自定义子类继承NSOperation</h3><p>你也可以实现自己的子类，通过重写<strong>main</strong>方法或者<strong>start</strong>方法来定义自己的operations。</p>
+<h4 id="u521B_u5EFA_u975E_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B"><a href="#u521B_u5EFA_u975E_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B" class="headerlink" title="创建非并发的NSOperation子类"></a>创建非并发的NSOperation子类</h4><p>创建非并发的NSOperation子类很简单，重写main方法就行了。<br>使用main方法非常简单，开发者不需要管理一些Operation的一些状态属性。当main方法执行完毕的时候，这个Operation也就结束了。这种只重写main方法的使用起来简单，灵活性不如重写start方法。因为main方法执行完就可以认为operation结束了，所以一般可用来做执行同步任务。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@implementation</span> YourOperation</span><br><span class="line">- (void)main</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 任务代码 ...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">@end</span></span><br></pre></td></tr></table></figure>
+<h4 id="u521B_u5EFA_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B"><a href="#u521B_u5EFA_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B" class="headerlink" title="创建并发的NSOperation子类"></a>创建并发的NSOperation子类</h4><p>重写start方法可以使你拥有更多的可操作性，如果你想再一个操作中执行异步任务，就重写start方法，但是这样你就必须得手动管理操作的状态了。这就涉及到前面所说的NSOperation的属性了。NSOperation提供了<strong>ready</strong> <strong>cancelled</strong> <strong>executing</strong>  <strong>finished</strong> 这几个状态的变化，并且这些状态都是通过设置了keypath的kvo通知所决定的。我们开发的时候也就是关注这些其中的状态。所以当我们重写NSOperation的start方法的时候，我们必须得手动的修改这些状态。上面的这些状态都是BOOL值。finished这个状态在操作完成后请及时设置为YES，因为NSOperationQueue所管理的队列中，只有isFinished为YES时才将其移除队列，这点在内存管理和避免死锁很关键。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">SavePhotoOperation</span>() </span>&#123;</span><br><span class="line"><span class="keyword">@private</span></span><br><span class="line">    <span class="built_in">BOOL</span> executing;</span><br><span class="line">    <span class="built_in">BOOL</span> finished;</span><br><span class="line">    <span class="built_in">BOOL</span> cancelled;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">PASavePhotoOperation</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)start &#123;</span><br><span class="line">    <span class="comment">// Always check for cancellation before launching the task.</span></span><br><span class="line">    <span class="keyword">if</span> ([<span class="keyword">self</span> isCancelled]) &#123;</span><br><span class="line">        <span class="comment">// Must move the operation to the finished state if it is canceled.</span></span><br><span class="line">        [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isFinished"</span>];</span><br><span class="line">        finished = <span class="literal">YES</span>;</span><br><span class="line">        [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isFinished"</span>];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// If the operation is not canceled, begin executing the task.</span></span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    [<span class="built_in">NSThread</span> detachNewThreadSelector:<span class="keyword">@selector</span>(main) toTarget:<span class="keyword">self</span> withObject:<span class="literal">nil</span>];</span><br><span class="line">    executing = <span class="literal">YES</span>;</span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)main &#123;</span><br><span class="line">  </span><br><span class="line">   <span class="keyword">@try</span> &#123;</span><br><span class="line">        <span class="comment">// Do the main work of the operation here.</span></span><br><span class="line"></span><br><span class="line">        [<span class="keyword">self</span> completeOperation];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">@catch</span>(...) &#123;</span><br><span class="line">        <span class="comment">// Do not rethrow exceptions.</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)completeOperation &#123;</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isFinished"</span>];</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    </span><br><span class="line">    executing = <span class="literal">NO</span>;</span><br><span class="line">    finished = <span class="literal">YES</span>;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isFinished"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)isConcurrent &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">YES</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)cancel &#123;</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isCancelled"</span>];</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    [<span class="keyword">self</span> willChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    </span><br><span class="line">    cancelled = <span class="literal">YES</span>;</span><br><span class="line">    executing = <span class="literal">NO</span>;</span><br><span class="line">    finished = <span class="literal">YES</span>;</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isCancelled"</span>];</span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isExecuting"</span>];</span><br><span class="line">    [<span class="keyword">self</span> didChangeValueForKey:<span class="string">@"isFinished"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)isExecuting &#123;</span><br><span class="line">    <span class="keyword">return</span> executing;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)isFinished &#123;</span><br><span class="line">    <span class="keyword">return</span> finished;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">BOOL</span>)isCancelled &#123;</span><br><span class="line">    <span class="keyword">return</span> cancelled;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>上面就是一个基本的自定义子类继承的NSOperation的写法，其中手动发送KVO消息。通知状态更改如下：</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">[self willChangeValueForKey:@"isCancelled"]</span><span class="comment">;</span></span><br><span class="line"><span class="title">[self willChangeValueForKey:@"isExecuting"]</span><span class="comment">;</span></span><br><span class="line"><span class="title">[self willChangeValueForKey:@"isExecuting"]</span><span class="comment">;</span></span><br><span class="line"></span><br><span class="line"><span class="setting">cancelled = <span class="value"><span class="keyword">YES</span>;</span></span></span><br><span class="line"><span class="setting">executing = <span class="value"><span class="keyword">NO</span>;</span></span></span><br><span class="line"><span class="setting">finished = <span class="value"><span class="keyword">YES</span>;</span></span></span><br><span class="line"><span class="title"></span><br><span class="line">[self didChangeValueForKey:@"isCancelled"]</span><span class="comment">;</span></span><br><span class="line"><span class="title">[self didChangeValueForKey:@"isExecuting"]</span><span class="comment">;</span></span><br><span class="line"><span class="title">[self didChangeValueForKey:@"isFinished"]</span><span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h4 id="NSOperation_u4F9D_u8D56_u5173_u7CFB"><a href="#NSOperation_u4F9D_u8D56_u5173_u7CFB" class="headerlink" title="NSOperation依赖关系"></a>NSOperation依赖关系</h4><p>我们可以设定各个任务之间的依赖关系，等到一个任务执行完毕之后才能执行之后的任务。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSBlockOperation</span> *op1 = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"1. 下载一个小说的压缩包, %@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line"> &#125;];</span><br><span class="line"><span class="built_in">NSBlockOperation</span> *op2 = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"2. 解压缩，删除压缩包, %@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">  &#125;];</span><br><span class="line"><span class="built_in">NSBlockOperation</span> *op3 = [<span class="built_in">NSBlockOperation</span> blockOperationWithBlock:^&#123;</span><br><span class="line">      <span class="built_in">NSLog</span>(<span class="string">@"3. 更新UI, %@"</span>,[<span class="built_in">NSThread</span> currentThread]);</span><br><span class="line">  &#125;];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 指定任务之间的依赖关系 -- 依赖关系可以跨队列(可以在子线程下载完，到主线程更新UI)</span></span><br><span class="line">  </span><br><span class="line">  [op2 addDependency:op1];</span><br><span class="line">  [op3 addDependency:op2];</span><br><span class="line">  <span class="comment">// waitUntilFinished 类似GCD的调度组的通知</span></span><br><span class="line">  <span class="comment">// NO 不等待，会直接执行  NSLog(@"come here");</span></span><br><span class="line">  <span class="comment">// YES 等待上面的操作执行结束，再 执行  NSLog(@"come here")</span></span><br><span class="line">  [<span class="keyword">self</span><span class="variable">.opQueue</span> addOperations:@[op1, op2] waitUntilFinished:<span class="literal">YES</span>];</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 在主线程更新UI</span></span><br><span class="line">  [[<span class="built_in">NSOperationQueue</span> mainQueue] addOperation:op3];</span><br><span class="line">  <span class="built_in">NSLog</span>(<span class="string">@"come here"</span>);</span><br></pre></td></tr></table></figure>
+<p><strong>注意点</strong>：千万不要出现循环依赖，也就是说不要出现A依赖B，B又依赖A的关系。</p>
+<h4 id="NSOperation_u6700_u5927_u5E76_u53D1_u6570"><a href="#NSOperation_u6700_u5927_u5E76_u53D1_u6570" class="headerlink" title="NSOperation最大并发数"></a>NSOperation最大并发数</h4><p>设置了最大并发数之后，同时执行的操作的数量便是最大并发数的数量。</p>
+<h4 id="NSOperation_u4EFB_u52A1_u7684_u5904_u7406"><a href="#NSOperation_u4EFB_u52A1_u7684_u5904_u7406" class="headerlink" title="NSOperation任务的处理"></a>NSOperation任务的处理</h4><p>我们可以取消操作队列中得任务，也可以挂起操作队列中得任务，都是由操作队列中的属性来进行控制的。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 取消队列的所有操作</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.opQueue</span> cancelAllOperations]; <span class="comment">// 取消队列的所有操作，会把任务从队列里面全部删除</span></span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSLog</span>(<span class="string">@"取消所有的操作"</span>);</span><br><span class="line">    </span><br><span class="line"> <span class="comment">// 取消队列的挂起状态</span></span><br><span class="line"> <span class="comment">// （只要是取消了队列的操作，我们就把队列处于启动状态。以便于队列的继续）</span></span><br><span class="line"> <span class="keyword">self</span><span class="variable">.opQueue</span><span class="variable">.suspended</span> = <span class="literal">NO</span>;</span><br></pre></td></tr></table></figure>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/iOS/" rel="tag">#iOS</a>
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/17/C语言学习整理（二）/" rel="next" title="C语言学习整理（二）">
+                <i class="fa fa-chevron-left"></i> C语言学习整理（二）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/07/19/NSOperation详解/"
+           data-title="NSOperation详解" data-url="vaexiaochang.cn/2016/07/19/NSOperation详解/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/ico.jpg" alt="zhouchang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhouchang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">我怎敢倒下，我身后空无一人。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chouchang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3562983664" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#NSOperation_u8BE6_u89E3"><span class="nav-number">1.</span> <span class="nav-text">NSOperation详解</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#NSOperation_u662F_u4EC0_u4E48_3F"><span class="nav-number">1.1.</span> <span class="nav-text">NSOperation是什么?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSOperation_u7684_u4E3B_u8981_u7279_u70B9"><span class="nav-number">1.1.1.</span> <span class="nav-text">NSOperation的主要特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#u5982_u4F55_u4F7F_u7528NSOperation"><span class="nav-number">1.2.</span> <span class="nav-text">如何使用NSOperation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#NSInvocationOperation"><span class="nav-number">1.2.1.</span> <span class="nav-text">NSInvocationOperation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NSBlockOperation"><span class="nav-number">1.2.2.</span> <span class="nav-text">NSBlockOperation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#u81EA_u5B9A_u4E49_u5B50_u7C7B_u7EE7_u627FNSOperation"><span class="nav-number">1.2.3.</span> <span class="nav-text">自定义子类继承NSOperation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u975E_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">创建非并发的NSOperation子类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#u521B_u5EFA_u5E76_u53D1_u7684NSOperation_u5B50_u7C7B"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">创建并发的NSOperation子类</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSOperation_u4F9D_u8D56_u5173_u7CFB"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">NSOperation依赖关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSOperation_u6700_u5927_u5E76_u53D1_u6570"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">NSOperation最大并发数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NSOperation_u4EFB_u52A1_u7684_u5904_u7406"><span class="nav-number">1.2.3.5.</span> <span class="nav-text">NSOperation任务的处理</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouchang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vaexiaochang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>

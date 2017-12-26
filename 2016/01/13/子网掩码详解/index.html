@@ -1,0 +1,822 @@
+<!doctype html>
+<html class="theme-next   use-motion ">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="96ypaMzFDVwkClNJqeszPCdDhAzWlNALvTNdOIl6gBg" />
+<meta name="baidu-site-verification" content="gaTPsggfLS" />
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css"/>
+
+
+
+
+  <link href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.4.5.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="笔记,网络," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=0.4.5.2" />
+
+
+
+
+
+
+<meta name="description" content="一、 子网掩码的概念及作用子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。
+二、 为什么需要使用子网掩码虽然我们说子网掩码可以分离出 IP 地址中的网络部">
+<meta property="og:type" content="article">
+<meta property="og:title" content="子网掩码详解(转)">
+<meta property="og:url" content="vaexiaochang.cn/2016/01/13/子网掩码详解/index.html">
+<meta property="og:site_name" content="Vae">
+<meta property="og:description" content="一、 子网掩码的概念及作用子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。
+二、 为什么需要使用子网掩码虽然我们说子网掩码可以分离出 IP 地址中的网络部">
+<meta property="og:updated_time" content="2016-01-13T06:10:38.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="子网掩码详解(转)">
+<meta name="twitter:description" content="一、 子网掩码的概念及作用子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。
+二、 为什么需要使用子网掩码虽然我们说子网掩码可以分离出 IP 地址中的网络部">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var CONFIG = {
+    scheme: '',
+    sidebar: 'post',
+    motion: true
+  };
+</script>
+
+  <title> 子网掩码详解(转) | Vae </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  <!--[if lte IE 8]>
+  <div style=' clear: both; height: 59px; padding:0 0 0 15px; position: relative;margin:0 auto;'>
+    <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+      <img src="http://7u2nvr.com1.z0.glb.clouddn.com/picouterie.jpg" border="0" height="42" width="820"
+           alt="You are using an outdated browser. For a faster, safer browsing experience, upgrade for free today or use other browser ,like chrome firefox safari."
+           style='margin-left:auto;margin-right:auto;display: block;'/>
+    </a>
+  </div>
+<![endif]-->
+  
+
+
+
+
+
+
+  <div class="container one-column page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Vae</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">现在开始认真的去做一些事</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu ">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-home fa-fw"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-th fa-fw"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-archive fa-fw"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-tags fa-fw"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-heartbeat fa-fw"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div id="content" class="content">
+          
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                子网掩码详解(转)
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            发表于
+            <time itemprop="dateCreated" datetime="2016-01-13T13:47:09+08:00" content="2016-01-13">
+              2016-01-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp; 分类于
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/网络/" itemprop="url" rel="index">
+                    <span itemprop="name">网络</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/01/13/子网掩码详解/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/01/13/子网掩码详解/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+         
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body">
+
+      
+      
+
+      
+        <span itemprop="articleBody"><h1 id="u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><a href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528" class="headerlink" title="一、 子网掩码的概念及作用"></a>一、 子网掩码的概念及作用</h1><p>子网掩码 (subnet mask) 又叫网络掩码、地址掩码、子网络遮罩，是一个应用于 TCP/IP 网络的 32 位二进制值。它可以屏蔽掉 IP 地址中的一部分，从而分离出 IP 地址中的网络部分与主机部分，基于子网掩码，管理员可以将网络进一步划分为若干子网。它必须结合 IP 地址一起使用。</p>
+<h1 id="u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801"><a href="#u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801" class="headerlink" title="二、 为什么需要使用子网掩码"></a>二、 为什么需要使用子网掩码</h1><p>虽然我们说子网掩码可以分离出 IP 地址中的网络部分与主机部分，可大家还是会有疑问，比如为什么要区分网络地址与主机地址？区分以后又怎样呢？那么好，让我们再详细的讲一下吧！  </p>
+<p>在使用 TCP/IP 协议的两台计算机之间进行通信时，我们通过将本机的子网掩码与接受方主机的 IP 地址进行 ‘ 与 ‘ 运算，即可得到目标主机所在的网络号，又由于每台主机在配置 TCP/IP 协议时都设置了一个本机 IP 地址与子网掩码，所以可以知道本机所在的网络号。</p>
+<p>通过比较这两个网络号，就可以知道接受方主机是否在本网络上。如果网络号相同，表明接受方在本网络上，那么可以通过相关的协议把数据包直接发送到目标主机；如果网络号不同，表明目标主机在远程网络上，那么数据包将会发送给本网络上的路由器，由路由器将数据包发送到其他网络，直至到达目的地。在这个过程中你可以看到，子网掩码是不可或缺的！</p>
+<h1 id="u4E09_u3001__u5982_u4F55_u7528_u5B50_u7F51_u63A9_u7801_u5F97_u5230_u7F51_u7EDC_/__u4E3B_u673A_u5730_u5740"><a href="#u4E09_u3001__u5982_u4F55_u7528_u5B50_u7F51_u63A9_u7801_u5F97_u5230_u7F51_u7EDC_/__u4E3B_u673A_u5730_u5740" class="headerlink" title="三、 如何用子网掩码得到网络 / 主机地址"></a>三、 如何用子网掩码得到网络 / 主机地址</h1><p>既然子网掩码这么重要，那么它是如何分离出 IP 地址中的网络地址和主机地址的呢？</p>
+<p>过程如下：</p>
+<ol>
+<li><p>将 IP 地址与子网掩码转换成二进制；</p>
+</li>
+<li><p>将二进制形式的 IP 地址与子网掩码做 ‘ 与 ‘ 运算，将答案化为十进制便得到网络地址；</p>
+</li>
+<li><p>将二进制形式的子网掩码取 ‘ 反 ‘ ；</p>
+</li>
+<li><p>将取 ‘ 反 ‘ 后的子网掩码与 IP 地址做 ‘ 与 ‘ 运算，将答案化为十进制便得到主机地址。</p>
+</li>
+</ol>
+<p>下面我们用一个例子给大家演示：</p>
+<p>假设有一个 I P 地址： 192.168.0.1</p>
+<p>子网掩码为： 255.255.255.0</p>
+<p>化为二进制为： I P 地址 11000000.10101000.00000000.00000001</p>
+<p>子网掩码 11111111.11111111.11111111.00000000</p>
+<p>将两者做 ‘ 与 ‘ 运算得： 11000000.10101000.00000000.00000000</p>
+<p>将其化为十进制得： 192.168.0.0</p>
+<p>这便是上面 IP 的网络地址，主机地址以此类推。<br><a id="more"></a></p>
+<p>小技巧：由于观察到上面的子网掩码为 C 类地址的默认子网掩码（至于为什么，可看后面的子网掩码分类就明白了），便可直接看出网络地址为 IP 地址的前三部分，即前三个字节，主机地址为最后一部分。</p>
+<p><strong> 解惑：</strong></p>
+<p>什么？你还是不懂？问我为什么要做 ‘ 与 ‘ 运算而不是别的？其实你仔细观察一下上面的例子就应该能明白。</p>
+<p>‘1’ 在做 ‘ 与 ‘ 运算时，保存对应项结果， ‘0’ 在做 ‘ 与 ‘ 运算时，将对应项清零，利用 ‘ 与 ‘ 的这个特性，当管理员设置子网掩码时，即将子网掩码上与网络地址所对应的位都设为 ‘1’, 其他位都设为 ‘0’, 那么当作 ‘ 与 ‘ 时， IP 地址中的网络号将被保留到结果中，而主机号将被置 0 ，这样就解析出了网络号，解析主机号也一样，只需先把子网掩码取 ‘ 反 ‘, 再做 ‘ 与 ‘ 。</p>
+<h1 id="u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B"><a href="#u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B" class="headerlink" title="四、 子网掩码的分类"></a>四、 子网掩码的分类</h1><h2 id="1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A"><a href="#1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A" class="headerlink" title="1 ）缺省子网掩码："></a>1 ）缺省子网掩码：</h2><p>即未划分子网，对应的网络号的位都置 1 ，主机号都置 0 。</p>
+<p>A 类网络缺省子网掩码： 255.0.0.0</p>
+<p>B 类网络缺省子网掩码： 255.255.0.0</p>
+<p>C 类网络缺省子网掩码： 255.255.255.0</p>
+<h2 id="2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A"><a href="#2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A" class="headerlink" title="2 ）自定义子网掩码："></a>2 ）自定义子网掩码：</h2><p>将一个网络划分为几个子网，需要每一段使用不同的网络号或子网号，实际上我们可以认为是将主机号分为两个部分：子网号、子网主机号。 形式如下：</p>
+<p>未做子网划分的 IP 地址：网络号＋主机号</p>
+<p>做子网划分后的 IP 地址：网络号＋子网号＋子网主机号</p>
+<p>也就是说 IP 地址在划分子网后，以前的主机号位置的一部分给了子网号，余下的是子网主机号。</p>
+<h1 id="u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F"><a href="#u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F" class="headerlink" title="五、子网编址技术"></a>五、子网编址技术</h1><p>前面几点介绍了子网掩码的一些知识，下面我们来看看子网划分，不要认为子网划分与子网掩码没有关系哟，子网划分也是靠子网掩码来实现的。</p>
+<p>子网划分说白了是这样一个事情：因为在划分了子网后， IP 地址的网络号是不变的，因此在局域网外部看来，这里仍然只存在一个网络，即网络号所代表的那个网络；但在网络内部却是另外一个景象，因为我们每个子网的子网号是不同的，当用化分子网后的 IP 地址与子网掩码（注意，这里指的子网掩码已经不是缺省子网掩码了，而是自定义子网掩码，是管理员在经过计算后得出的）做 ‘ 与 ‘ 运算时，每个子网将得到不同的子网地址，从而实现了对网络的划分（得到了不同的地址，当然就能区别出各个子网了，有趣吧）。</p>
+<p>子网编址技术 ，即子网划分将会有助于以下问题的解决：</p>
+<p>1 ）巨大的网络地址管理耗费：如果你是一个 A 类网络的管理员，你一定会为管理数量庞大的主机而头痛的；</p>
+<p>2 ）路由器中的选路表的急剧膨胀：当路由器与其他路由器交换选路表时，互联网的负载是很高的，所需的计算量也很高；</p>
+<p>3 ） IP 地址空间有限并终将枯竭：这是一个至关重要的问题，高速发展的 internet, 使原来的编址方法不能适应，而一些 IP 地址却不能被充分的利用，造成了浪费。</p>
+<p>因此，在配置局域网或其他网络时，根据需要划分子网是很重要的，有时也是必要的。现在，子网编址技术已经被绝大多数局域网所使用。</p>
+<h1 id="u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801"><a href="#u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801" class="headerlink" title="六、 如何划分子网及确定子网掩码"></a>六、 如何划分子网及确定子网掩码</h1><p>在动手划分之前，一定要考虑网络目前的需求和将来的需求计划。</p>
+<p>划分子网主要从以下方面考虑 :</p>
+<ol>
+<li><p>网络中物理段的数量（即要划分的子网数量）</p>
+</li>
+<li><p>每个物理段的主机的数量</p>
+</li>
+</ol>
+<p><strong> 确定子网掩码的步骤： </strong></p>
+<ul>
+<li><p>第一步：确定物理网段的数量，并将其转换为二进制数，并确定位数 n 。如：你需要 6 个子网， 6 的二进制值为 110 ，共 3 位 , 即 n=3 ；</p>
+</li>
+<li><p>第二步：按照你 IP 地址的类型写出其缺省子网掩码。如 C 类，则缺省子网掩码为 11111111.11111111.11111111.00000000 ；</p>
+</li>
+<li><p>第三步：将子网掩码中与主机号的前 n 位对应的位置置 1 ，其余位置置 0 。若 n=3 且为</p>
+</li>
+<li><p>C 类地址：则得到子网掩码为 11111111.11111111.11111111.11100000 化为十进制得到 255.255.255.224</p>
+</li>
+<li><p>B 类地址：则得到子网掩码为 11111111.11111111.11100000.00000000 化为十进制得到 255.255.224.0</p>
+</li>
+<li><p>A 类地址：则得到子网掩码为 11111111.11100000.00000000.00000000 化为十进制得到 255.224.0.0</p>
+</li>
+</ul>
+<p>另：由于网络被划分为 6 个子网，占用了主机号的前 3 位，若是 C 类地址，则主机号只能用 5 位来表示主机号，因此每个子网内的主机数量＝（ 2^5 ）－ 2 ＝ 30 ， 6 个子网总共所能标识的主机数将小于 254 ，这点请大家注意！（至于为什么减 2 ，可看后面说明）</p>
+<p><strong> 解惑：</strong></p>
+<p>你可能有这样的疑问，比如在上面的例子里， 6 的二进制值为 110 ，那么为什么要将子网掩码中与主机号的前 n 位对应的位置都置 1 ，而不是用 6 的二进制 110 去替代前 n 位呢？</p>
+<p>呵呵，这个问题提的很好，答案是这样的：我们计算子网掩码的目的是什么？就是希望它在做 ‘ 与 ‘ 的时候能够解析出网络号，也就是说它与网络号所对应的位置都应该是 1 （当然包括与子网号所对应的位置），那么很显然，你写上 110 是不对的，如果你这么写，那么它的意义是主机号的前两位作为子网号，那么这样将最多划分 2 个子网（不明白没关系，下面有计算子网数量的方法），与我们当初所要划分的 6 个子网显然是不一致的。这样解释你能明白马？</p>
+<p>细心的人可能会发现，划分 4 个子网， 5 个子网和 6 个子网的子网掩码是一样的，同为 255.255.255.224 ，是不是错了呢？三个子网掩码应该不同呀？呵呵，是这样的，因为 4 ， 5 ， 6 的二进制值都是 3 为，因此在子网掩码中这三位都置 1 ，划分是没有问题的，只是你的理解上有一点小小的问题，划分为 4 个子网，其实可以理解为划分为 6 个子网，但你只使用了其中的 4 个。比如你想划分 8 个子网，与划分 14 个子网所得到的子网掩码是一样的，都占用了 4 位作为子网号。</p>
+<h1 id="u4E03_u3001_u76F8_u5173_u95EE_u9898"><a href="#u4E03_u3001_u76F8_u5173_u95EE_u9898" class="headerlink" title="七、相关问题"></a>七、相关问题</h1><h2 id="1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F"><a href="#1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F" class="headerlink" title="1.如何判断是否做了子网划分？"></a>1.如何判断是否做了子网划分？</h2><p>如果它使用了缺省子网掩码，那么表示没有作子网划分；反之，则一定作了子网划分。</p>
+<h2 id="2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F"><a href="#2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F" class="headerlink" title="2.如何计算子网地址？"></a>2.如何计算子网地址？</h2><p>将 IP 地址与子网掩码的二进制形式做 ‘ 与 ‘ ，得到的结果即为子网地址。</p>
+<h2 id="3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F"><a href="#3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F" class="headerlink" title="3.如何计算主机地址？"></a>3.如何计算主机地址？</h2><p>先将子网掩码的二进制取 ‘ 反 ‘ ，再与 IP 地址做 ‘ 与 ‘ 。</p>
+<h2 id="4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F"><a href="#4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F" class="headerlink" title="4.如何计算子网数量？"></a>4.如何计算子网数量？</h2><p>这个问题大家会常常提到，还是从子网掩码入手，主要有两个步骤：</p>
+<ul>
+<li><p>观察子网掩码的二进制形式，确定作为子网号的位数 n ；</p>
+</li>
+<li><p>子网数量为 2^n － 2 。（为什么减 2 ，继续往下看）</p>
+</li>
+</ul>
+<p>举个例子来说，比如有这样一个子网掩码： 255.255.255.224 其二进制为：</p>
+<p>11111111.11111111.11111111.11100000</p>
+<p>可见 n=3,2 的 3 次方为 8 ，说明子网地址可能有</p>
+<p>如下 8 种情况：</p>
+<p>000      001      010       011      100     101      110      111</p>
+<p>但其中代表网络自身的 000 ；代表广播地址的 111 是被保留的，所以要减 2 。</p>
+<h2 id="5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F"><a href="#5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F" class="headerlink" title="5.如何计算总主机数量，子网内主机数量？"></a>5.如何计算总主机数量，子网内主机数量？</h2><p>总主机数量＝子网数量×子网内主机数量</p>
+<p>再用一个例子给大家说明，比如子网掩码为 255.255.255.224</p>
+<p>上面的讨论知道它最多可以划分 6 个子网，那么每个子网内最多有多少个主机呢？其实上面我已经给大家算过了，由于网络被划分为 6 个子网，占用了主机号的前 3 位，且是 C 类地址，则主机号只能用 5 位来表示主机号，因此子网内的主机数量＝（ 2 的 5 次方）－ 2 ＝ 30.</p>
+<p>因此通过这个子网掩码我们可以算出这个网络最多可以标识 6*30=180 个主机（可见，在化分子网后，整个网络所能标识的主机数量将减少）。</p>
+<h2 id="6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4"><a href="#6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4" class="headerlink" title="6.计算自定义子网 IP 地址范围"></a>6.计算自定义子网 IP 地址范围</h2><p>通过一个自定义子网掩码，我们可以得到这个网络所有可能的 IP 地址范围。</p>
+<p>具体步骤：</p>
+<ul>
+<li><p>写出二进制子网地址；</p>
+</li>
+<li><p>将子网地址化为十进制；</p>
+</li>
+<li><p>计算子网所能容纳主机数；</p>
+</li>
+<li><p>得出 IP 范围（起始地址：子网地址＋ 1 ；终止地址：子网地址＋主机数）</p>
+</li>
+</ul>
+<p>假设一个子网掩码为： 255.255.255.224 ，可知其最多可以划分 6 个子网，子网内主机数为 30 ，那么所有可能的 IP 地址及计算流程如下：</p>
+<p>子网－－——子网地址（二进制）－－－－－－子网地址－－－－－实际 IP 范围</p>
+<p>1 － 11001010.01110000.00001010.00100000 － 202.112.10.32 － 202.112.10.33~202.112.10.62</p>
+<p>2 － 11001010.01110000.00001010.01000000 － 202.112.10.64 － 202.112.10.65~202.112.10.94</p>
+<p>3 － 11001010.01110000.00001010.01100000 － 202.112.10.96 － 202.112.10.97~202.112.10.126</p>
+<p>4 － 11001010.01110000.00001010.10000000 － 202.112.10.128 － 202.112.10.129~202.112.10.158</p>
+<p>5 － 11001010.01110000.00001010.10100000 － 202.112.10.160 － 202.112.10.161~202.112.10.190</p>
+<p>6 － 11001010.01110000.00001010.11000000 － 202.112.10.192 － 202.112.10.193~202.112.10.222</p>
+<p>来源：<a href="http://blog.csdn.net/jason314/article/details/5447743" target="_blank" rel="external">http://blog.csdn.net/jason314/article/details/5447743</a></p>
+</span>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/笔记/" rel="tag">#笔记</a>
+          
+            <a href="/tags/网络/" rel="tag">#网络</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/01/06/iOS开发学习/" rel="next" title="iOS开发学习">
+                <i class="fa fa-chevron-left"></i> iOS开发学习
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/01/iOS四种本地存储/" rel="prev" title="iOS开发中四种本地存储">
+                iOS开发中四种本地存储 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+        </div>
+
+        
+
+
+        
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/01/13/子网掩码详解/"
+           data-title="子网掩码详解(转)" data-url="vaexiaochang.cn/2016/01/13/子网掩码详解/">
+      </div>
+    
+  </div>
+
+
+      </div>
+
+      
+        
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" src="/images/ico.jpg" alt="zhouchang" itemprop="image"/>
+          <p class="site-author-name" itemprop="name">zhouchang</p>
+        </div>
+        <p class="site-description motion-element" itemprop="description">我怎敢倒下，我身后空无一人。</p>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">12</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          <div class="site-state-item site-state-categories">
+            <a href="/categories">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">分类</span>
+              </a>
+          </div>
+
+          <div class="site-state-item site-state-tags">
+            <a href="/tags">
+              <span class="site-state-item-count">8</span>
+              <span class="site-state-item-name">标签</span>
+              </a>
+          </div>
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/chouchang" target="_blank">
+                  
+                    <i class="fa fa-github"></i> GitHub
+                  
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3562983664" target="_blank">
+                  
+                    <i class="fa fa-globe"></i> weibo
+                  
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc-indicator-top post-toc-indicator">
+            <i class="fa fa-angle-double-up"></i>
+          </div>
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E00_u3001__u5B50_u7F51_u63A9_u7801_u7684_u6982_u5FF5_u53CA_u4F5C_u7528"><span class="nav-number">1.</span> <span class="nav-text">一、 子网掩码的概念及作用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E8C_u3001__u4E3A_u4EC0_u4E48_u9700_u8981_u4F7F_u7528_u5B50_u7F51_u63A9_u7801"><span class="nav-number">2.</span> <span class="nav-text">二、 为什么需要使用子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E09_u3001__u5982_u4F55_u7528_u5B50_u7F51_u63A9_u7801_u5F97_u5230_u7F51_u7EDC_/__u4E3B_u673A_u5730_u5740"><span class="nav-number">3.</span> <span class="nav-text">三、 如何用子网掩码得到网络 / 主机地址</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u56DB_u3001__u5B50_u7F51_u63A9_u7801_u7684_u5206_u7C7B"><span class="nav-number">4.</span> <span class="nav-text">四、 子网掩码的分类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1__uFF09_u7F3A_u7701_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.1.</span> <span class="nav-text">1 ）缺省子网掩码：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2__uFF09_u81EA_u5B9A_u4E49_u5B50_u7F51_u63A9_u7801_uFF1A"><span class="nav-number">4.2.</span> <span class="nav-text">2 ）自定义子网掩码：</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E94_u3001_u5B50_u7F51_u7F16_u5740_u6280_u672F"><span class="nav-number">5.</span> <span class="nav-text">五、子网编址技术</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u516D_u3001__u5982_u4F55_u5212_u5206_u5B50_u7F51_u53CA_u786E_u5B9A_u5B50_u7F51_u63A9_u7801"><span class="nav-number">6.</span> <span class="nav-text">六、 如何划分子网及确定子网掩码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#u4E03_u3001_u76F8_u5173_u95EE_u9898"><span class="nav-number">7.</span> <span class="nav-text">七、相关问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-_u5982_u4F55_u5224_u65AD_u662F_u5426_u505A_u4E86_u5B50_u7F51_u5212_u5206_uFF1F"><span class="nav-number">7.1.</span> <span class="nav-text">1.如何判断是否做了子网划分？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u5730_u5740_uFF1F"><span class="nav-number">7.2.</span> <span class="nav-text">2.如何计算子网地址？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-_u5982_u4F55_u8BA1_u7B97_u4E3B_u673A_u5730_u5740_uFF1F"><span class="nav-number">7.3.</span> <span class="nav-text">3.如何计算主机地址？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-_u5982_u4F55_u8BA1_u7B97_u5B50_u7F51_u6570_u91CF_uFF1F"><span class="nav-number">7.4.</span> <span class="nav-text">4.如何计算子网数量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-_u5982_u4F55_u8BA1_u7B97_u603B_u4E3B_u673A_u6570_u91CF_uFF0C_u5B50_u7F51_u5185_u4E3B_u673A_u6570_u91CF_uFF1F"><span class="nav-number">7.5.</span> <span class="nav-text">5.如何计算总主机数量，子网内主机数量？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-_u8BA1_u7B97_u81EA_u5B9A_u4E49_u5B50_u7F51_IP__u5730_u5740_u8303_u56F4"><span class="nav-number">7.6.</span> <span class="nav-text">6.计算自定义子网 IP 地址范围</span></a></li></ol></li></ol></div>
+            
+          </div>
+          <div class="post-toc-indicator-bottom post-toc-indicator">
+            <i class="fa fa-angle-double-down"></i>
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+      
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="icon-next-heart fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">zhouchang</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT
+  </a>
+</div>
+
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+本站总访问量 <span id="busuanzi_value_site_pv"></span> &nbsp&nbsp&nbsp
+您是第<span id="busuanzi_value_site_uv"></span>个来到的小伙伴
+
+
+
+      </div>
+    </footer>
+
+    <div class="back-to-top"></div>
+  </div>
+
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  
+
+  
+    
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"vaexiaochang"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+    
+     
+
+
+    
+  
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js"></script>
+  <script type="text/javascript" src="/js/fancy-box.js?v=0.4.5.2"></script>
+
+
+  <script type="text/javascript" src="/js/helpers.js?v=0.4.5.2"></script>
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js"></script>
+<script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js"></script>
+
+<script type="text/javascript" src="/js/motion.js?v=0.4.5.2" id="motion.global"></script>
+
+
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  
+<script type="text/javascript" src="/js/bootstrap.scrollspy.js?v=0.4.5.2" id="bootstrap.scrollspy.custom"></script>
+
+
+<script type="text/javascript" id="sidebar.toc.highlight">
+  $(document).ready(function () {
+    var tocSelector = '.post-toc';
+    var $tocSelector = $(tocSelector);
+    var activeCurrentSelector = '.active-current';
+
+    $tocSelector
+      .on('activate.bs.scrollspy', function () {
+        var $currentActiveElement = $(tocSelector + ' .active').last();
+
+        removeCurrentActiveClass();
+        $currentActiveElement.addClass('active-current');
+
+        $tocSelector[0].scrollTop = $currentActiveElement.position().top;
+      })
+      .on('clear.bs.scrollspy', function () {
+        removeCurrentActiveClass();
+      });
+
+    function removeCurrentActiveClass () {
+      $(tocSelector + ' ' + activeCurrentSelector)
+        .removeClass(activeCurrentSelector.substring(1));
+    }
+
+    function processTOC () {
+      getTOCMaxHeight();
+      toggleTOCOverflowIndicators();
+    }
+
+    function getTOCMaxHeight () {
+      var height = $('.sidebar').height() -
+                   $tocSelector.position().top -
+                   $('.post-toc-indicator-bottom').height();
+
+      $tocSelector.css('height', height);
+
+      return height;
+    }
+
+    function toggleTOCOverflowIndicators () {
+      tocOverflowIndicator(
+        '.post-toc-indicator-top',
+        $tocSelector.scrollTop() > 0 ? 'show' : 'hide'
+      );
+
+      tocOverflowIndicator(
+        '.post-toc-indicator-bottom',
+        $tocSelector.scrollTop() >= $tocSelector.find('ol').height() - $tocSelector.height() ? 'hide' : 'show'
+      )
+    }
+
+    $(document).on('sidebar.motion.complete', function () {
+      processTOC();
+    });
+
+    $('body').scrollspy({ target: tocSelector });
+    $(window).on('resize', function () {
+      if ( $('.sidebar').hasClass('sidebar-active') ) {
+        processTOC();
+      }
+    });
+
+    onScroll($tocSelector);
+
+    function onScroll (element) {
+      element.on('mousewheel DOMMouseScroll', function (event) {
+          var oe = event.originalEvent;
+          var delta = oe.wheelDelta || -oe.detail;
+
+          this.scrollTop += ( delta < 0 ? 1 : -1 ) * 30;
+          event.preventDefault();
+
+          toggleTOCOverflowIndicators();
+      });
+    }
+
+    function tocOverflowIndicator (indicator, action) {
+      var $indicator = $(indicator);
+      var opacity = action === 'show' ? 1 : 0;
+      $indicator.velocity ?
+        $indicator.velocity('stop').velocity({
+          opacity: opacity
+        }, { duration: 100 }) :
+        $indicator.stop().animate({
+          opacity: opacity
+        }, 100);
+    }
+
+  });
+</script>
+
+<script type="text/javascript" id="sidebar.nav">
+  $(document).ready(function () {
+    var html = $('html');
+    var TAB_ANIMATE_DURATION = 200;
+    var hasVelocity = $.isFunction(html.velocity);
+
+    $('.sidebar-nav li').on('click', function () {
+      var item = $(this);
+      var activeTabClassName = 'sidebar-nav-active';
+      var activePanelClassName = 'sidebar-panel-active';
+      if (item.hasClass(activeTabClassName)) {
+        return;
+      }
+
+      var currentTarget = $('.' + activePanelClassName);
+      var target = $('.' + item.data('target'));
+
+      hasVelocity ?
+        currentTarget.velocity('transition.slideUpOut', TAB_ANIMATE_DURATION, function () {
+          target
+            .velocity('stop')
+            .velocity('transition.slideDownIn', TAB_ANIMATE_DURATION)
+            .addClass(activePanelClassName);
+        }) :
+        currentTarget.animate({ opacity: 0 }, TAB_ANIMATE_DURATION, function () {
+          currentTarget.hide();
+          target
+            .stop()
+            .css({'opacity': 0, 'display': 'block'})
+            .animate({ opacity: 1 }, TAB_ANIMATE_DURATION, function () {
+              currentTarget.removeClass(activePanelClassName);
+              target.addClass(activePanelClassName);
+            });
+        });
+
+      item.siblings().removeClass(activeTabClassName);
+      item.addClass(activeTabClassName);
+    });
+
+    $('.post-toc a').on('click', function (e) {
+      e.preventDefault();
+      var targetSelector = escapeSelector(this.getAttribute('href'));
+      var offset = $(targetSelector).offset().top;
+      hasVelocity ?
+        html.velocity('stop').velocity('scroll', {
+          offset: offset  + 'px',
+          mobileHA: false
+        }) :
+        $('html, body').stop().animate({
+          scrollTop: offset
+        }, 500);
+    });
+
+    // Expand sidebar on post detail page by default, when post has a toc.
+    motionMiddleWares.sidebar = function () {
+      var $tocContent = $('.post-toc-content');
+      if (CONFIG.sidebar === 'post') {
+        if ($tocContent.length > 0 && $tocContent.html().trim().length > 0) {
+          displaySidebar();
+        }
+      }
+    };
+  });
+</script>
+
+
+
+  <script type="text/javascript" src="/js/bootstrap.js"></script>
+
+  
+  
+
+  
+  
+
+</body>
+</html>
